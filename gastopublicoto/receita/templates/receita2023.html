@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Receita{% endblock title %}
+
+
+
+{% block content %}
+<body class="no-background-image">
+    <link rel="stylesheet" href="{% static '/css/receita-despesa.css' %}" />
+    <div class="main-content">
+        <div class="fullscreen-container">
+            <div class="iframe-container">
+                <!-- Receita -->
+                <iframe src="https://app.powerbi.com/view?r=eyJrIjoiZTk3NWU5NDQtMDM4NS00MTMzLWEyZmItOWUzMDhhZmIwMGM3IiwidCI6IjBkNzg5ODQ4LTZlZTAtNDk3Ny04YjQ2LTUzNDFlMTNiODg3NCJ9"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

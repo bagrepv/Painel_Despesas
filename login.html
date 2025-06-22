@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DGGP</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="form-header">
+            <div class="logo-container">
+             <img src="logo.png" alt="Logo DGGP" class="sidebar-logo">
+                <div class="logo">
+                    <h3 style="background-color: rgb(224, 221, 22);">Diretoria de Gestão</h3> 
+                    <h4>do Gasto Público</h4>
+                </div>
+            </div>
+        </div>
+
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="email">
+                    <span class="material-icons">email</span> E-mail
+                </label>
+                <input type="email" id="email" placeholder="Digite seu e-mail" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <span class="material-icons">lock</span> Senha
+                </label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+            </div>
+
+            <a href="recuperar-senha.html" class="forgot-password-link">
+             Esqueceu a Senha?
+        </a>
+
+            <button type="submit" class="login-button">
+                <span class="material-icons">login</span> Entrar
+            </button>
+
+            <div class="form-footer">
+                <div class="first-access">
+                
+            <a href="primeiro_acesso.html#modal-perfil">Primeiro Acesso</a>
+
+                </a>
+                </div>
+                <div class="password-section"><br/>
+   
+         
+    
+        
+    
+</div>
+
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Verifica se já está logado
+        //if (localStorage.getItem('userToken')) {
+        //    window.location.href = 'index.html';
+        // }
+
+        // Login normal
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                const data = {email, password}
+                fetch('http://localhost:5000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(res => {
+                    localStorage.setItem('userToken', 'token_autenticado');
+                    window.location.href = 'index.html';
+                }).catch(error => {
+                    alert("Erro ao logar.");
+                });
+            }
+        });
+
+        // Primeiro acesso - já define um token temporário
+        document.getElementById('first-access-link').addEventListener('click', function(e) {
+            localStorage.setItem('userToken', 'token_primeiro_acesso');
+            localStorage.setItem('firstAccess', 'true');
+            // O link já redireciona via HTML
+        });
+    </script>
+</body>
+</html>

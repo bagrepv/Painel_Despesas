@@ -1,0 +1,24 @@
+.main-content {
+    position: relative;
+    height: calc(100vh - 130px); /* Calcula a altura para caber entre a barra superior e o rodapé */
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    background-color: #f8f9fc; /* Define uma cor de fundo suave (pode ser ajustada) */
+    overflow: hidden; /* Oculta qualquer conteúdo excedente */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ocupa toda a altura disponível */
+    width: 100%; /* Ocupa toda a largura disponível */
+}
+
+.welcome-image {
+    max-height: 100%; /* Garante que a imagem não exceda a altura do contêiner */
+    max-width: 100%; /* Garante que a imagem não exceda a largura do contêiner */
+    object-fit: contain; /* Ajusta a imagem para caber no contêiner mantendo as proporções */
+    margin: auto; /* Centraliza no espaço disponível */
+}

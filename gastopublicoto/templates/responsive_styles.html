@@ -1,0 +1,74 @@
+<style>
+    /* 🔹 Ajusta o tamanho do iframe */
+.iframe-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 100px); /* Ajusta altura do iframe */
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 🔹 Ajusta a barra lateral para telas menores */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 60px; /* Diminui a largura */
+    }
+    
+    .sidebar .nav-item a {
+        font-size: 12px; /* Reduz o tamanho do texto */
+        text-align: center;
+    }
+    
+    .sidebar .nav-item i {
+        font-size: 16px; /* Ajusta o tamanho dos ícones */
+    }
+    
+    .sidebar .sidebar-brand {
+        display: none; /* Esconde o nome DGGP no topo */
+    }
+}
+
+/* 🔹 Esconder o footer no modo horizontal em celulares */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    footer.sticky-footer {
+        display: none;
+    }
+
+    .iframe-container {
+        height: 100vh; /* Ocupa toda a tela */
+    }
+
+    .sidebar {
+        width: 50px; /* Deixa a sidebar mais estreita */
+    }
+
+    .sidebar .nav-item a span {
+        display: none; /* Esconde os textos dos botões */
+    }
+
+    .sidebar .nav-item i {
+        font-size: 18px; /* Ajusta tamanho do ícone */
+    }
+}
+
+/* 🔹 Footer menor no modo retrato */
+@media (max-width: 768px) and (orientation: portrait) {
+    footer.sticky-footer {
+        height: 50px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .copyright {
+        font-size: 12px;
+    }
+}
+</style>

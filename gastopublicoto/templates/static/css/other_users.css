@@ -1,0 +1,79 @@
+body.no-background-image::before {
+    background-image: none; /* Nega a imagem de fundo */
+}
+
+.main-content {
+    min-height: 40vh;
+    transition: all 0.5s ease;
+    width: calc(100% - 50px);
+    padding-left: 7rem;
+}
+
+
+/* Estilos básicos para a tabela */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+th, td {
+    border: 3px solid rgba(255, 255, 255, .5);
+    padding: 8px;
+    text-align: left;
+}
+
+#user-table {
+    color: #002b46;
+    background: #fff;
+}
+
+th, td{
+    background: rgba(0, 43, 70, 0.8);
+    color: #fff;
+}
+tbody {
+    padding: 8px;
+}
+
+
+button {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(237, 41, 57, .9);
+}
+
+
+/* Estilos para tornar a tabela responsiva em telas menores */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        /* Altera o fluxo para uma coluna em telas menores */
+    }
+
+    .main-content {
+        margin-top: 30px;
+        width: 100%;
+        /* Garante que a tabela ocupe toda a largura */
+        margin-left: 0;
+        /* Remove a margem à esquerda */
+        transition: all 0.5s ease;
+        /* Adiciona transição para a animação da tabela */
+    }
+
+    .table-container {
+        width: 100%;
+        /* Ajusta a largura para ocupar toda a tela */
+        z-index: 1;
+        /* Garante que a tabela fique por baixo da sidebar */
+    }
+
+    .sidebar.active+.main-content {
+        margin-left: -260px;
+        /* Adiciona a margem para acomodar a sidebar ativa */
+        width: 0;
+        /* Ajusta a largura para acomodar a sidebar */
+        transition: all 0.5s ease;
+        /* Adiciona transição para a animação da tabela */
+    }
+}

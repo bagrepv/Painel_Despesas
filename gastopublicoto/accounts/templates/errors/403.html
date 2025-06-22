@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Negado - 403</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #d9534f;
+        }
+
+        p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        a {
+            color: #0275d8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>403</h1>
+        <p>Você não tem permissão para acessar esta página.</p>
+        <p>Por favor, entre em contato com o administrador se você acha que isso é um erro.</p>
+        <p><a href="{% url 'accounts:home' %}">Voltar para a página inicial</a></p>
+    </div>
+</body>
+</html>

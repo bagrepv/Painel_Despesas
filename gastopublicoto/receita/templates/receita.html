@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Receita & Despesa 2025{% endblock title %}
+{% block content %}
+<!-- Conteúdo -->
+<main class="container pt-5 mt-4">
+    <h2 class="mb-4">Receita & Despesa 2025</h2>
+    <p>Relatório interativo (Power BI):</p>
+    <div class="ratio ratio-16x9">
+        <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjhlMzc2MWItNTkxNC00YjBhLWJiNDItMDE0YzE1MTJkZjY3IiwidCI6ImE0NjA1ZTZmLTQ5MTktNGI2Zi1iNjZlLThlMWNhMTdjMDJjYyJ9" allowfullscreen></iframe>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Usuários Cadastrados{% endblock title %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/other_users.css' %}">
+    <body class="no-background-image">
+        
+        <div class="main-content">
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Nome Completo</th>
+                        <th>Email</th>
+                        <th>Orgão</th>
+                        <th>Função</th>
+                        <th>Telefone</th>
+                        <th>Ação</th>
+                    </tr>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.first_name }} {{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.orgao }}</td>
+                            <td>{{ user.sector }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>
+                                <button>
+                                    <a href="{% url 'accounts:delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Total de usuários</th>
+                        <td>{{ users|length }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+{% endblock %}

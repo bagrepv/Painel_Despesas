@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    overflow: auto; /* Remove a capacidade de rolagem */
+}
+
+body.no-background-image::before {
+    background-image: none;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, .1);
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    backdrop-filter: blur(50px);
+    border-radius: 10px;
+    color: #333;
+    padding: 40px 35px 55px;
+    margin: 20px auto;
+}
+
+.wrapper h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-dark); /* Nova cor adicionada */
+}
+
+.form-box.register {
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.form-box.register h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-dark); /* Nova cor adicionada */
+}
+
+/* Adicione estilos para a classe .input-box dentro de .input-group */
+/* Adicione estilos para a classe .input-box dentro de .input-group */
+.input-group .input-box {
+    width: 100%;
+    position: relative;
+    margin-bottom: 13px;
+    background-color: var(--color-white); /* Adiciona o fundo branco */
+    color: var(--color-dark); /* Adiciona a cor do texto */
+}
+
+/* Estilos adicionais para o modo escuro */
+.dark-mode .input-group .input-box {
+    background-color: var(--color-dark); /* Altera o fundo para escuro */
+    color: var(--color-light); /* Altera a cor do texto para claro */
+}
+
+.input-group .input-box .form-control {
+    width: calc(100% - 0px);
+    height: 50px;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, .2);
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    border-radius: 6px;
+    padding: 15px 15px 15px 40px;
+}
+
+.input-group .input-box .form-control::placeholder {
+    color: #333;
+}
+
+.input-group .input-box .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+/* Adicione estilos para o botão */
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #333;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.input-group .input-box.password {
+    width: calc(50% - 20px); /* Ajuste conforme necessário */
+    margin-right: 20px; /* Espaçamento entre os campos de senha */
+}
+
+.input-group .input-box.password input {
+    width: calc(100% - 0px);
+}
+
+.input-group .input-box.password .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.input-group .input-box.password input[type="password"] {
+    height: 50px;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    border-radius: 6px;
+    padding: 15px 15px 15px 40px;
+}
+
+.input-group .input-box.password input[type="password"]::placeholder {
+    color: #333;
+}
+
+/* Adicione estilos para as mensagens de alerta */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.error {
+    color: red;
+    margin-bottom: 20px;
+}
+
+
+
+/* Media queries for responsiveness */
+@media (max-width: 992px) {
+    .wrapper {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        width: 80%;
+    }
+}
+
+@media (max-width: 576px) {
+    .wrapper {
+        width: 90%;
+    }
+}

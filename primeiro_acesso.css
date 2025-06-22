@@ -1,0 +1,163 @@
+/* Estrutura geral */
+body {
+  font-family: Arial, sans-serif;
+ background-color: #007bff;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Modal visível com :target */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+ 
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-overlay:target {
+  display: flex;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  position: relative;
+  overflow-y: auto;
+  max-height: 95vh;
+}
+
+/* Botão de fechar */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #666;
+  font-weight: bold;
+}
+
+/* Grupos de formulários */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.senha-curta {
+  max-width: 200px;
+}
+
+
+.form-group {
+  flex: 1 1 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título das seções */
+h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+}
+
+/* Rótulos */
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Inputs */
+.form-group input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Ações */
+.form-actions {
+  text-align: right;
+  margin-top: 1.5rem;
+}
+
+.btn-save {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+}
+
+.btn-save:hover {
+  background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .form-group {
+    flex: 1 1 100%;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .btn-save {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-actions {
+    text-align: center;
+  }
+}
+
+.form-actions {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center
+}
+
+.btn-save {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+}
+
+.btn-save:hover {
+  background-color: #0056b3;
+}
+
+
+

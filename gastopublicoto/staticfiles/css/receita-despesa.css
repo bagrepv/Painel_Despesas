@@ -1,0 +1,32 @@
+body.no-background-image::before {
+    background-image: none; /* Nega a imagem de fundo */
+}
+
+main {
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1; /* Altere para um valor positivo */
+}
+
+/* Receita */
+
+.fullscreen-container {
+    width: 85vw; /* Define a largura como 100% da largura da tela */
+    height: 100vh; /* Define a altura como 100% da altura da tela */
+}
+
+.iframe-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Receita FIM */

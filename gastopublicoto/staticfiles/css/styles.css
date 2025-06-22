@@ -1,0 +1,664 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary: #6C9BCF;
+    --color-danger: #FF0060;
+    --color-success: #1B9C85;
+    --color-warning: #F7D060;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.dark-mode-variables {
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 992px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 11px;
+    }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0; /* fundo em um nível mais baixo */
+    background-image: url(../img/background9.png);
+    background-repeat: no-repeat;
+    background-size: cover; /* cobre toda a área disponível */
+    background-position: right top;
+    height: 95vh; /* altura definida em 95% da altura da viewport */
+    width: 100%; /* largura definida para cobrir toda a largura da viewport */
+    pointer-events: none; /* garante que o fundo não interfira com outros elementos interativos */
+}
+
+.logo {
+    position: relative; /* para posicionar o logo sobre o fundo */
+    z-index: 1; /* garantir que o logo fique acima do fundo */
+}
+
+#logo-image {
+    width: 140px; /* ajuste o tamanho conforme necessário */
+    height: auto;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+    background-color: var(--color-background);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;
+    position: relative;
+    overflow: hidden;
+}
+
+main {
+    grid-column: 2 / 3;
+}
+
+/* Ajuste do rodapé */
+footer {
+    position: static; /* Corrige a posição para telas menores */
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+}
+
+.footer-content {
+    font-size: 0.8rem;
+}
+
+footer.dark-mode {
+    background-color: var(--color-white);
+    color: var(--color-dark);
+}
+
+a {
+    color: var(--color-dark);
+}
+
+img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 0.87rem;
+}
+
+small {
+    font-size: 0.76rem;
+}
+
+p {
+    color: var(--color-dark-variant);
+}
+
+b {
+    color: var(--color-dark);
+}
+
+.text-muted {
+    color: var(--color-info-dark);
+}
+
+.primary {
+    color: var(--color-primary);
+}
+
+.danger {
+    color: var(--color-danger);
+}
+
+.success {
+    color: var(--color-success);
+}
+
+.warning {
+    color: var(--color-warning);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 12rem auto 23rem;
+    gap: 1.5rem;
+    width: 96%;
+    margin: 0 auto;
+}
+
+aside {
+    grid-column: 1 / 2;
+}
+
+aside .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+aside .toggle .logo {
+    display: flex;
+    gap: 0.5rem;
+}
+
+aside .toggle .logo img {
+    width: 10rem;
+    height: auto;
+}
+
+aside .toggle .close {
+    padding-right: 1rem;
+    display: none;
+}
+
+aside .sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    height: 80vh;
+    position: relative;
+    top: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar:hover {
+    box-shadow: none;
+}
+
+aside .sidebar a {
+    display: flex;
+    align-items: center;
+    color: var(--color-info-dark);
+    height: 3.7rem;
+    gap: 1rem;
+    position: relative;
+    margin-left: 2rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a span {
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a:last-child {
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+aside .sidebar a.active {
+    width: 100%;
+    color: var(--color-primary);
+    background-color: var(--color-light);
+    margin-left: 0;
+}
+
+aside .sidebar a.active::before {
+    content: '';
+    width: 6px;
+    height: 18px;
+    background-color: var(--color-primary);
+}
+
+aside .sidebar a.active span {
+    color: var(--color-primary);
+    margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar a:hover {
+    color: var(--color-primary);
+}
+
+aside .sidebar a:hover span {
+    margin-left: 0.6rem;
+}
+
+aside .sidebar .message-count {
+    background-color: var(--color-danger);
+    padding: 2px 6px;
+    color: var(--color-white);
+    font-size: 11px;
+    border-radius: var(--border-radius-1);
+}
+
+.right-section {
+    grid-column: 3 / 4;
+}
+
+.right-section .nav {
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+}
+
+.right-section .nav button {
+    display: none;
+}
+
+.right-section .dark-mode {
+    background-color: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+}
+
+.right-section .dark-mode span {
+    font-size: 1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-section .dark-mode span.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: var(--border-radius-1);
+}
+
+.right-section .nav .profile {
+    display: flex;
+    gap: 2rem;
+    text-align: right;
+}
+
+.right-section .nav .profile .profile-photo {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.right-section .user-profile {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1rem;
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.right-section .user-profile:hover {
+    box-shadow: none;
+}
+
+.right-section .user-profile img {
+    width: 11rem;
+    height: auto;
+    margin-bottom: 0.8rem;
+    border-radius: 50%;
+}
+
+.right-section .user-profile h2 {
+    margin-bottom: 0.2rem;
+}
+
+.right-section .reminders {
+    margin-top: 2rem;
+}
+
+.right-section .reminders .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+}
+
+.right-section .reminders .header span {
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.right-section .reminders .header h3 {
+    margin-left: 1rem;
+}
+
+.right-section .reminders .reminders-list {
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 0.6rem;
+}
+
+.right-section .reminders .reminders-list .reminder {
+    background-color: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.8rem;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.right-section .reminders .reminders-list .reminder:hover {
+    box-shadow: none;
+}
+
+.right-section .reminders .reminders-list .reminder span {
+    font-size: 1.4rem;
+}
+
+.right-section .reminders .reminders-list .reminder small {
+    font-size: 0.7rem;
+}
+
+.right-section .reminders .reminders-list .reminder h4 {
+    margin-top: 0.2rem;
+}
+
+.right-section .reminders .reminders-list .reminder .reminder-time {
+    font-size: 0.8rem;
+    color: var(--color-info-dark);
+}
+
+.right-section .recent-updates {
+    margin-top: 2rem;
+}
+
+.right-section .recent-updates .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right-section .recent-updates .header span {
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.right-section .recent-updates .updates {
+    margin-top: 1rem;
+    padding-right: 1rem;
+}
+
+.right-section .recent-updates .updates .update {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.7rem 1rem;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-2);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.right-section .recent-updates .updates .update:hover {
+    box-shadow: none;
+}
+
+.right-section .recent-updates .updates .update img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.right-section .recent-updates .updates .update .message {
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.right-section .recent-updates .updates .update .message p {
+    font-size: 0.7rem;
+    margin-top: 0.2rem;
+    color: var(--color-info-dark);
+}
+
+.right-section .recent-updates .updates .update small {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--color-info-dark);
+}
+
+.right-section .sales-analytics {
+    margin-top: 2rem;
+}
+
+.right-section .sales-analytics .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right-section .sales-analytics .header h3 {
+    margin-left: 0.5rem;
+}
+
+.right-section .sales-analytics .header span {
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.right-section .sales-analytics .item {
+    background-color: var(--color-white);
+    padding: 0.8rem 1rem;
+    border-radius: var(--card-border-radius);
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--box-shadow);
+}
+
+.right-section .sales-analytics .item:hover {
+    box-shadow: none;
+}
+
+.right-section .sales-analytics .item span {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-1);
+    margin-right: 1rem;
+}
+
+.right-section .sales-analytics .item .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.right-section .sales-analytics .item .info h3 {
+    color: var(--color-dark);
+}
+
+.right-section .sales-analytics .item .info small {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--color-info-dark);
+    margin-top: 0.2rem;
+}
+
+.right-section .sales-analytics .item.sales {
+    border: 1px solid var(--color-primary);
+}
+
+.right-section .sales-analytics .item.sales span {
+    color: var(--color-primary);
+    background-color: rgba(108, 155, 207, 0.2);
+}
+
+.right-section .sales-analytics .item.expenses {
+    border: 1px solid var(--color-danger);
+}
+
+.right-section .sales-analytics .item.expenses span {
+    color: var(--color-danger);
+    background-color: rgba(255, 0, 96, 0.2);
+}
+
+.right-section .sales-analytics .item.income {
+    border: 1px solid var(--color-success);
+}
+
+.right-section .sales-analytics .item.income span {
+    color: var(--color-success);
+    background-color: rgba(27, 156, 133, 0.2);
+}
+
+/* Responsividade do container */
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 8rem auto;
+    }
+
+    .right-section {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    aside {
+        display: none; /* Oculta o menu lateral */
+    }
+
+    aside.show {
+        display: block;
+        position: fixed;
+        left: 0;
+        width: 10rem;
+        height: 100%;
+        z-index: 999;
+        background-color: var(--color-white);
+        box-shadow: var(--box-shadow);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .right-section {
+        display: none;
+    }
+}
+
+/* Ajuste do menu em dispositivos menores */
+@media (max-width: 576px) {
+    aside.show {
+        width: 8rem;
+        padding: 1rem;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Botões */
+.buttons {
+    display: flex;
+    flex-direction: column; /* Empilha os botões verticalmente em telas pequenas */
+    position: absolute;
+    bottom: 10%;
+    right: 1rem;
+}
+
+@media (max-width: 768px) {
+    .buttons {
+        right: 0.5rem;
+        bottom: 5%;
+    }
+
+    .buttons .nav-item {
+        font-size: 20px;
+    }
+}

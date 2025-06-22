@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Perfil do Usuário{% endblock %}
+
+{% block content %}
+<!-- Conteúdo -->
+    <main class="container pt-5 mt-4">
+        <div class="row">
+        <!-- Editar Perfil -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                Editar Informações do Perfil
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'accounts:profile' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label>Primeiro Nome</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                    <input type="text" id="first_name" name="first_name" class="form-control" value="{{ user.first_name }}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Último Nome</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                    <input type="text" id="last_name" name="last_name" class="form-control" value="{{ user.last_name }}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>CPF</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-id-card"></i></span>
+                    <input type="text" id="cpf" name="cpf" class="form-control" value="{{ user.cpf }}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Email</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                    <input type="email" id="email" name="email" class="form-control" value="{{ user.email }}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Órgão</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-briefcase"></i></span>
+                    <input type="text" id="orgao" name="orgao" class="form-control" value="{{ user.orgao }}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Setor</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-briefcase"></i></span>
+                    <input type="text" id="sector" name="sector" class="form-control" value="{{ user.sector }}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Telefone</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-phone"></i></span>
+                    <input type="text" id="phone" name="phone" class="form-control" value="{{ user.phone }}">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar Perfil</button>
+                </form>
+            </div>
+            </div>
+        </div>
+
+        <!-- Trocar Senha -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                Trocar Senha
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'accounts:profile' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label>Senha Atual</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
+                    <input type="password" id="current_password" name="current_password" class="form-control" required placeholder="Senha Atual">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Nova Senha</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
+                    <input type="password" id="new_password" name="new_password" class="form-control" required placeholder="Nova Senha">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Confirmar Nova Senha</label>
+                    <div class="input-group">
+                    <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" required placeholder="Confirmar Nova Senha">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Trocar Senha</button>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+    </main>
+{% endblock %}

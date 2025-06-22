@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alteração de Senha</title>
+
+  <!-- ✅ Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- ✅ Estilo CSS embutido -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1976d2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .password-section {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .password-section h2 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .password-form .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .password-form label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .password-form input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .form-actions {
+      text-align: right;
+      margin-top: 1.5rem;
+    }
+
+    .btn-change {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-change:hover {
+      background-color: #0056b3;
+    }
+
+    .material-icons {
+      font-size: 20px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="password-section">
+    <h2><span class="material-icons">lock</span> Alteração de Senha</h2>
+    
+    <form class="password-form">
+      
+      
+      <div class="form-group">
+        <label for="nova-senha"><span class="material-icons">lock_reset</span> Nova Senha</label>
+        <input type="password" id="nova-senha" name="nova-senha" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmar-senha"><span class="material-icons">done_all</span> Confirmar Nova Senha</label>
+        <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn-change">
+          <span class="material-icons">autorenew</span> Alterar Senha
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

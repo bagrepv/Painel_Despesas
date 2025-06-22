@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Despesa 2024{% endblock title %}
+
+{% block content %}
+<div class="container-fluid mt-2">
+    <!-- Card for Power BI Report -->
+    <div class="card shadow mb-4">
+        <div class="card-body p-0">
+            <div class="iframe-container">
+                <!-- Ajuste do iframe para responsividade -->
+                <iframe src="https://app.powerbi.com/view?r=eyJrIjoiZTQ1NjE0MDItOWY0ZS00YzhlLTk3MzEtNjg1YTMwMDY2MzRmIiwidCI6IjBkNzg5ODQ4LTZlZTAtNDk3Ny04YjQ2LTUzNDFlMTNiODg3NCJ9"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'responsive_styles.html' %}
+
+{% endblock %}
