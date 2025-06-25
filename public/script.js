@@ -201,15 +201,19 @@ function setupFormMasks() {
 function checkAuthentication() {
     const userToken = localStorage.getItem('userToken');
     const isLoginPage = window.location.pathname.includes('login.html');
+    // Adiciona uma nova verificação para a página de primeiro acesso
+    const isPrimeiroAcessoPage = window.location.pathname.includes('primeiro_acesso.html');
 
-    // Redireciona para a página de login se o usuário não está autenticado e não está na página de login.
-    if (!userToken && !isLoginPage) {
+    // Redireciona para a página de login se o usuário não está autenticado
+    // E não está na página de login OU na página de primeiro acesso.
+    if (!userToken && !isLoginPage && !isPrimeiroAcessoPage) { // <-- Condição MODIFICADA
         window.location.href = 'login.html';
         return;
     }
     
-    // Redireciona para a página principal (index) se o usuário já está autenticado e está na página de login.
-    if (userToken && isLoginPage) {
+    // Opcional: Redireciona para a página principal (index) se já está autenticado
+    // e tentar acessar a página de login OU a página de primeiro acesso.
+    if (userToken && (isLoginPage || isPrimeiroAcessoPage)) { // <-- Condição Opcional MODIFICADA
         window.location.href = 'index.html';
     }
 }
