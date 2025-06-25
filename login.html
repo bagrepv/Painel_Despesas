@@ -50,54 +50,44 @@
                 </a>
                 </div>
                 <div class="password-section"><br/>
-   
-         
-    
-        
-    
-</div>
-
             </div>
-        </form>
-    </div>
-
+                </div>
+                     </form>
+                         </div>
     <script>
-        // Verifica se já está logado
-        //if (localStorage.getItem('userToken')) {
-        //    window.location.href = 'index.html';
-        // }
-
-        // Login normal
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if (email && password) {
-                const data = {email, password}
-                fetch('http://localhost:5000/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(res => {
-                    localStorage.setItem('userToken', 'token_autenticado');
-                    window.location.href = 'index.html';
-                }).catch(error => {
-                    alert("Erro ao logar.");
-                });
-            }
+        
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    if (email && password) {
+        const data = { email, password };
+        fetch('https://painel-despesas.onrender.com/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(res => {
+            localStorage.setItem('userToken', 'token_autenticado');
+            window.location.href = 'index.html';
+        })
+        .catch(error => {
+            alert("Erro ao logar.");
         });
+    }
+});
 
-        // Primeiro acesso - já define um token temporário
+
+        
         document.getElementById('first-access-link').addEventListener('click', function(e) {
             localStorage.setItem('userToken', 'token_primeiro_acesso');
             localStorage.setItem('firstAccess', 'true');
-            // O link já redireciona via HTML
+          
         });
     </script>
 </body>
