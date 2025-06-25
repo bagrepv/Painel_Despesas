@@ -217,8 +217,6 @@ function checkAuthentication() {
         window.location.href = 'index.html';
     }
 }
-
-// =============================================
 // INICIALIZAÇÃO PRINCIPAL DA APLICAÇÃO
 // =============================================
 
