@@ -1,116 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Login - DGGP</title>
- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- <link rel="stylesheet" href="login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DGGP</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-<div class="login-container">
-    <div class="form-header">
-            <div class="logo-container">
-             <img src="logo.png" alt="Logo DGGP" class="sidebar-logo">
-                <div class="logo">
-                    <h3 style="background-color: rgb(224, 221, 22);">Diretoria de Gestão</h3> 
-                    <h4>do Gasto Público</h4>
-                </div>
-            </div>
-        </div>
+    <div class="login-container">
+        <div class="form-header">
+            <div class="logo-container">
+               <img src="logo.png" alt="Logo DGGP" class="sidebar-logo">
+                <div class="logo">
+                    <h3 style="background-color: rgb(224, 221, 22);">Diretoria de Gestão</h3> 
+                    <h4>do Gasto Público</h4>
+                </div>
+            </div>
+        </div>
 
-        <form id="loginForm" class="login-form">
-            <div class="form-group">
-                <label for="email">
-                    <span class="material-icons">email</span> E-mail
-                </label>
-                <input type="email" id="email" placeholder="Digite seu e-mail" required>
-            </div>
+        <!-- FORMULÁRIO DE LOGIN: GARANTA QUE id="loginForm" ESTÁ AQUI E CORRETO -->
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="email">
+                    <span class="material-icons">email</span> E-mail
+                </label>
+                <input type="email" id="email" placeholder="Digite seu e-mail" required>
+            </div>
 
-            <div class="form-group">
-                <label for="password">
-                    <span class="material-icons">lock</span> Senha
-                </label>
-                <input type="password" id="password" placeholder="Digite sua senha" required>
-            </div>
+            <div class="form-group">
+                <label for="password">
+                    <span class="material-icons">lock</span> Senha
+                </label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+            </div>
 
-            <a href="recuperar-senha.html" class="forgot-password-link">
-             Esqueceu a Senha?
-        </a>
+            <a href="recuperar-senha.html" class="forgot-password-link">
+               Esqueceu a Senha?
+            </a>
 
-            <button type="submit" class="login-button">
-                <span class="material-icons">login</span> Entrar
-            </button>
+            <button type="submit" class="login-button">
+                <span class="material-icons">login</span> Entrar
+            </button>
 
-            <div class="form-footer">
-                <div class="first-access">
-                
-            <a href="primeiro_acesso.html#modal-perfil" id="first-access-link">Primeiro Acesso</a> <!-- ADICIONADO O ID AQUI -->
+            <div class="form-footer">
+                <div class="first-access">
+                <!-- LINK PRIMEIRO ACESSO: GARANTA QUE id="first-access-link" ESTÁ AQUI E CORRETO -->
+                <a href="primeiro_acesso.html#modal-perfil" id="first-access-link">Primeiro Acesso</a>
+                </div>
+                <div class="password-section"><br/>
+            </div>
+                </div>
+            </form>
+        </div>
+    <!-- Script JavaScript para o formulário de login. Deve estar aqui no final do body. -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede o envio padrão do formulário
 
-                </a>
-                </div>
-                <div class="password-section"><br/>
-            </div>
-                </div>
-                     </form>
-                         </div>
-    <script>
-        
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    
-    if (email && password) {
-        const data = { email, password };
-        fetch('https://painel-despesas.onrender.com/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(res => {
-            // Corrigido: Em um cenário real, o token viria do res.
-            // Por agora, mantemos o token fixo como um placeholder.
-            localStorage.setItem('userToken', 'token_autenticado');
-            window.location.href = 'index.html';
-        })
-        .catch(error => {
-            // NÃO use alert() em produção, use um modal personalizado.
-            alert("Erro ao logar. Verifique suas credenciais."); 
-            console.error("Erro no login:", error);
-        });
-    }
-});
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                const data = { email, password };
+                // URL do seu endpoint de login no backend (Render)
+                const backendURL = 'https://painel-despesas.onrender.com/api/login'; 
 
-// Este bloco para o link 'first-access-link' é o que estava causando o erro!
-// Não é mais necessário, pois o link HTML já aponta para 'primeiro_acesso.html#modal-perfil'
-// e a lógica de abrir o modal está no script.js carregado em primeiro_acesso.html.
-/*
-document.getElementById('first-access-link').addEventListener('click', function(e) {
-    localStorage.setItem('userToken', 'token_primeiro_acesso');
-    localStorage.setItem('firstAccess', 'true');
-});
-*/
+                fetch(backendURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    // Verifica se a resposta não foi OK (status de erro)
+                    if (!response.ok) {
+                        // Tenta ler a mensagem de erro do backend, se houver
+                        return response.json().then(errorData => {
+                            throw new Error(errorData.message || 'Erro desconhecido no login.');
+                        });
+                    }
+                    return response.json(); // Se OK, parseia a resposta JSON
+                })
+                .then(res => {
+                    // Se o login foi bem-sucedido, armazena um token (aqui fixo por exemplo)
+                    // Em um cenário real, o backend retornaria um token JWT ou similar.
+                    localStorage.setItem('userToken', 'token_autenticado'); 
+                    window.location.href = 'index.html'; // Redireciona para a página principal
+                })
+                .catch(error => {
+                    // Exibe uma mensagem de erro para o usuário
+                    // NÃO use alert() em produção. Use um modal ou elemento na tela.
+                    alert(`Erro ao logar: ${error.message || 'Verifique suas credenciais e tente novamente.'}`);
+                    console.error("Erro detalhado no login:", error);
+                });
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        });
 
-// Se você está usando o script.js para gerenciar essa lógica,
-// o evento de click para o link "Primeiro Acesso" deve ser gerenciado no script.js
-// ou o link deve ser apenas um href puro sem JavaScript extra aqui.
-
-// Como o objetivo é ir para primeiro_acesso.html e abrir o modal,
-// a linha 'window.location.href = 'primeiro_acesso.html#modal-perfil';'
-// não precisa ser no JS. O próprio href já faz isso.
-// Se você quiser usar JS para o clique no link,
-// você precisaria do ID 'first-access-link' e a lógica aqui.
-// Mas o link direto no HTML já é suficiente para o que você quer.
-
-// Como o erro indica que 'first-access-link' é null, a melhor solução é:
-// 1. ADICIONAR o ID="first-access-link" ao <a> no HTML.
-// 2. REMOVER o bloco de JS comentado acima, pois ele não é mais necessário
-//    se o objetivo é apenas redirecionar para a página com o modal.
-    </script>
+        // ESTE BLOCO ABAIXO FOI REMOVIDO/COMENTADO EM VERSÕES ANTERIORES.
+        // É CRÍTICO QUE ELE NÃO EXISTA MAIS AQUI, POIS A LÓGICA DEVE ESTAR EM script.js
+        // E O REDIRECIONAMENTO É FEITO DIRETAMENTE PELO href do link.
+        /*
+        document.getElementById('first-access-link').addEventListener('click', function(e) {
+            // ... lógica antiga que não deve mais estar aqui ...
+        });
+        */
+    </script>
 </body>
 </html>
