@@ -55,45 +55,58 @@ function setupLogout() {
 }
 
 /**
- * Configura o formulário de perfil
+ * Configura o formulário de perfil (AGORA USADO PARA O PRIMEIRO ACESSO TAMBÉM)
  */
 function setupProfileForm() {
-    const profileForm = document.querySelector('.profile-form');
-    if (profileForm) {
-        profileForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nome = document.getElementById('nome').value;
-            const cpf = document.getElementById('cpf').value;
-            const senha = document.getElementById('senha').value;
-            const email = document.getElementById('email').value;
-            const telefone = document.getElementById('telefone').value;
-            const orgao = document.getElementById('orgao').value;
-            const setor = document.getElementById('setor').value;
-            const cargo = document.getElementById('cargo').value;
-            const data = {
-                nome,
-                cpf,
-                senha,
-                email,
-                telefone,
-                orgao,
-                setor,
-                cargo,
+    // Seleciona o formulário AGORA PELO ID CORRETO usado em primeiro_acesso.html
+    const primeiroAcessoForm = document.getElementById('primeiroAcessoForm'); 
+    
+    if (primeiroAcessoForm) { // Verifica se o formulário existe na página
+        primeiroAcessoForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Impede o recarregamento da página
+
+            // Coleta todos os dados dos campos do formulário
+            const formData = {
+                nome: document.getElementById('nome').value,
+                cpf: document.getElementById('cpf').value,
+                email: document.getElementById('email').value,
+                telefone: document.getElementById('telefone').value,
+                senha: document.getElementById('senha').value, // A senha será hasheada no backend
+                orgao: document.getElementById('orgao').value,
+                setor: document.getElementById('setor').value,
+                cargo: document.getElementById('cargo').value
             };
-            
-            fetch('http://localhost:5000/api/sign-up', {
-                    method: 'POST',
+
+            // URL do seu endpoint de cadastro no backend (Render)
+            // Lembre-se: Para testar LOCALMENTE o backend, mude para 'http://localhost:5000/api/sign-up'
+            const backendURL = 'https://painel-despesas.onrender.com/api/sign-up'; 
+
+            try {
+                // Envia os dados para o backend usando a Fetch API
+                const response = await fetch(backendURL, {
+                    method: 'POST', // Método HTTP POST para enviar dados
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json' // Indica que o corpo da requisição é JSON
                     },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(res => {
-                    console.log(res)
-                }).catch(error => {
-                    alert("Erro ao logar.");
+                    body: JSON.stringify(formData) // Converte o objeto JS para uma string JSON
                 });
+
+                const data = await response.json(); // Tenta analisar a resposta como JSON
+
+                if (response.ok) { // Verifica se a resposta foi um sucesso (status 2xx)
+                    alert('Cadastro realizado com sucesso! Você pode fazer login agora.');
+                    // Redireciona para a página de login após o cadastro
+                    window.location.href = 'login.html';
+                } else {
+                    // Se o backend retornou um erro (ex: e-mail já existe, validação)
+                    alert(`Erro no cadastro: ${data.message || 'Ocorreu um erro desconhecido.'}`);
+                    console.error('Erro no cadastro (resposta do servidor):', data);
+                }
+            } catch (error) {
+                // Captura erros de rede ou outros problemas na requisição
+                alert('Não foi possível conectar ao servidor. Verifique sua conexão ou tente novamente mais tarde.');
+                console.error('Erro na requisição de cadastro (frontend):', error);
+            }
         });
     }
 }
@@ -131,6 +144,8 @@ function setupPasswordForm() {
  * Configura o link "Primeiro acesso"
  */
 function setupFirstAccessLink() {
+    // Este link é para navegação interna, se houver um link na mesma página
+    // que leva à seção de perfil/cadastro.
     const firstAccessLink = document.getElementById('go-to-profile');
     if (firstAccessLink) {
         firstAccessLink.addEventListener('click', function(e) {
@@ -196,33 +211,55 @@ function checkAuthentication() {
 // =============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica autenticação
+    // Verifica autenticação (se este script for usado em outras páginas, como index.html)
     checkAuthentication();
     
-    // Configura componentes
+    // Configurações gerais de navegação e formulários
     setupMenuNavigation();
     setupLogout();
-    setupProfileForm();
+    setupProfileForm(); // <-- Esta função agora está correta para o primeiro acesso
     setupPasswordForm();
     setupFirstAccessLink();
     setupFormMasks();
     
     // Mostra a última seção visitada ou o dashboard por padrão
+    // Isso provavelmente é para a página 'index.html' ou similar, não para 'primeiro_acesso.html'
     const lastSection = localStorage.getItem('lastVisitedSection') || 'dashboard-content';
-    showSection(lastSection);
+    // showSection(lastSection); // Removido, pois primeiro_acesso.html abre um modal
 });
 
+// Este bloco está duplicado e o que manipula a abertura do modal de primeiro acesso
+// deveria ser mais genérico para a página 'primeiro_acesso.html'
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica se é primeiro acesso
-    if (localStorage.getItem('firstAccess') === 'true') {
-        showSection('profile-content');
-        localStorage.removeItem('firstAccess'); // Opcional: remove a flag após uso
-        
-        // Destaca campos obrigatórios
-        document.querySelectorAll('#profile-content input[required]').forEach(input => {
-            input.style.border = '2px solid #FFA500';
+    // Se o modal estiver sendo aberto via #modal-perfil na URL
+    if (window.location.hash === '#modal-perfil') {
+        const modalPerfil = document.getElementById('modal-perfil');
+        if (modalPerfil) {
+            modalPerfil.style.display = 'flex'; // Exibe o modal
+        }
+    }
+
+    // Configura o botão de fechar do modal
+    const closeBtn = document.querySelector('#modal-perfil .close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalPerfil = document.getElementById('modal-perfil');
+            if (modalPerfil) {
+                modalPerfil.style.display = 'none';
+                history.replaceState(null, '', window.location.pathname); // Limpa o hash da URL
+            }
         });
     }
-    
-    // Restante do seu código...
+
+    // Código relacionado ao primeiro acesso de perfil, se a página for para isso
+    // if (localStorage.getItem('firstAccess') === 'true') {
+    //     showSection('profile-content'); // Isso esperaria uma seção com ID 'profile-content'
+    //     localStorage.removeItem('firstAccess'); // Opcional: remove a flag após uso
+        
+    //     // Destaca campos obrigatórios - isso é mais CSS do que JS, mas ok
+    //     document.querySelectorAll('#profile-content input[required]').forEach(input => {
+    //         input.style.border = '2px solid #FFA500';
+    //     });
+    // }
 });
