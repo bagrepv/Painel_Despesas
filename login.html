@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <!-- FORMULÁRIO DE LOGIN: GARANTA QUE id="loginForm" ESTÁ AQUI E CORRETO -->
+        <!-- FORMULÁRIO DE LOGIN: ID "loginForm" é crucial para o JavaScript abaixo -->
         <form id="loginForm" class="login-form">
             <div class="form-group">
                 <label for="email">
@@ -45,7 +45,7 @@
 
             <div class="form-footer">
                 <div class="first-access">
-                <!-- LINK PRIMEIRO ACESSO: GARANTA QUE id="first-access-link" ESTÁ AQUI E CORRETO -->
+                <!-- LINK PRIMEIRO ACESSO: APENAS O HREF PURO, SEM JS EXTRA NESTA PÁGINA -->
                 <a href="primeiro_acesso.html#modal-perfil" id="first-access-link">Primeiro Acesso</a>
                 </div>
                 <div class="password-section"><br/>
@@ -53,7 +53,7 @@
                 </div>
             </form>
         </div>
-    <!-- Script JavaScript para o formulário de login. Deve estar aqui no final do body. -->
+    <!-- SCRIPT JAVASCRIPT APENAS PARA O FORMULÁRIO DE LOGIN -->
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Impede o envio padrão do formulário
@@ -85,13 +85,10 @@
                 })
                 .then(res => {
                     // Se o login foi bem-sucedido, armazena um token (aqui fixo por exemplo)
-                    // Em um cenário real, o backend retornaria um token JWT ou similar.
                     localStorage.setItem('userToken', 'token_autenticado'); 
                     window.location.href = 'index.html'; // Redireciona para a página principal
                 })
                 .catch(error => {
-                    // Exibe uma mensagem de erro para o usuário
-                    // NÃO use alert() em produção. Use um modal ou elemento na tela.
                     alert(`Erro ao logar: ${error.message || 'Verifique suas credenciais e tente novamente.'}`);
                     console.error("Erro detalhado no login:", error);
                 });
@@ -100,14 +97,10 @@
             }
         });
 
-        // ESTE BLOCO ABAIXO FOI REMOVIDO/COMENTADO EM VERSÕES ANTERIORES.
-        // É CRÍTICO QUE ELE NÃO EXISTA MAIS AQUI, POIS A LÓGICA DEVE ESTAR EM script.js
-        // E O REDIRECIONAMENTO É FEITO DIRETAMENTE PELO href do link.
-        /*
-        document.getElementById('first-access-link').addEventListener('click', function(e) {
-            // ... lógica antiga que não deve mais estar aqui ...
-        });
-        */
+        // IMPORTANTE: QUALQUER CÓDIGO JS PARA O LINK 'first-access-link' OU OUTRO NOVO AQUI
+        // NÃO DEVE TER UM e.preventDefault() SEM UM window.location.href POSTERIOR
+        // OU, SIMPLIFIQUE E DEIXE APENAS O HREF DO HTML FAZER A NAVEGAÇÃO.
+        // O IDEAL É QUE NÃO HAJA MAIS JS AQUI PARA 'first-access-link', DEIXE O HREF FAZER O TRABALHO.
     </script>
 </body>
 </html>
