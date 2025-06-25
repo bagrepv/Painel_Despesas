@@ -1,109 +1,116 @@
 /**
- * Mostra uma seção específica e esconde as demais
- * @param {string} sectionId - ID da seção a ser mostrada
+ * Mostra uma seção específica e esconde as demais.
+ * Esta função é útil para páginas que contêm múltiplas seções (como index.html).
+ * @param {string} sectionId - ID da seção a ser mostrada.
  */
 function showSection(sectionId) {
-    // Esconde todas as seções
+    // Esconde todas as seções marcadas com a classe 'content-section'.
     document.querySelectorAll('.content-section').forEach(section => {
         section.classList.remove('active');
         section.style.display = 'none';
     });
     
-    // Mostra a seção solicitada
+    // Mostra a seção solicitada.
     const section = document.getElementById(sectionId);
     if (section) {
         section.classList.add('active');
         section.style.display = 'block';
     }
     
-    // Armazena a última seção visitada
+    // Armazena a última seção visitada no localStorage para persistência.
     localStorage.setItem('lastVisitedSection', sectionId);
 }
 
 /**
- * Configura a navegação do menu principal
+ * Configura a navegação do menu principal.
+ * Atribui event listeners aos links do menu que possuem o atributo 'data-section'.
  */
 function setupMenuNavigation() {
     const menuLinks = document.querySelectorAll('.menu a[data-section]');
     menuLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const sectionId = this.getAttribute('data-section');
-            showSection(sectionId);
+            e.preventDefault(); // Impede o comportamento padrão do link.
+            const sectionId = this.getAttribute('data-section'); // Obtém o ID da seção do atributo.
+            showSection(sectionId); // Chama a função para mostrar a seção.
         });
     });
 }
 
 /**
- * Configura o logout do sistema
+ * Configura a funcionalidade de logout do sistema.
+ * Limpa o token de autenticação e redireciona para a página de login.
  */
 function setupLogout() {
     const logoutLink = document.querySelector('.logout a');
     if (logoutLink) {
         logoutLink.addEventListener('click', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Impede o comportamento padrão do link.
             
-            // Limpa os dados de autenticação
+            // Limpa todos os dados de autenticação e sessão do armazenamento local e de sessão.
             localStorage.removeItem('userToken');
-            sessionStorage.clear();
-            localStorage.removeItem('lastVisitedSection');
+            sessionStorage.clear(); // Limpa todas as chaves da sessão
+            localStorage.removeItem('lastVisitedSection'); // Limpa a última seção visitada
             
-            // Redireciona para a página de login
+            // Redireciona o usuário para a página de login.
             window.location.href = 'login.html';
         });
     }
 }
 
 /**
- * Configura o formulário de perfil (AGORA USADO PARA O PRIMEIRO ACESSO TAMBÉM)
+ * Configura o formulário de perfil, que agora também é usado para o "Primeiro Acesso" (cadastro).
+ * Lida com a submissão do formulário, coleta dados e os envia para o backend.
  */
 function setupProfileForm() {
-    // Seleciona o formulário AGORA PELO ID CORRETO usado em primeiro_acesso.html
+    // Seleciona o formulário pelo seu ID específico 'primeiroAcessoForm'.
     const primeiroAcessoForm = document.getElementById('primeiroAcessoForm'); 
     
-    if (primeiroAcessoForm) { // Verifica se o formulário existe na página
+    if (primeiroAcessoForm) { // Verifica se o formulário existe na página atual.
         primeiroAcessoForm.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Impede o recarregamento da página
+            e.preventDefault(); // Impede o recarregamento padrão da página ao submeter o formulário.
 
-            // Coleta todos os dados dos campos do formulário
+            // Coleta todos os valores dos campos do formulário em um objeto.
             const formData = {
                 nome: document.getElementById('nome').value,
                 cpf: document.getElementById('cpf').value,
                 email: document.getElementById('email').value,
                 telefone: document.getElementById('telefone').value,
-                senha: document.getElementById('senha').value, // A senha será hasheada no backend
+                senha: document.getElementById('senha').value, // A senha será hasheada no backend.
                 orgao: document.getElementById('orgao').value,
                 setor: document.getElementById('setor').value,
                 cargo: document.getElementById('cargo').value
             };
 
-            // URL do seu endpoint de cadastro no backend (Render)
-            // Lembre-se: Para testar LOCALMENTE o backend, mude para 'http://localhost:5000/api/sign-up'
+            // URL do endpoint de cadastro no backend.
+            // NOTA: Para testes locais do backend, esta URL pode precisar ser 'http://localhost:5000/api/sign-up'.
+            // Para produção no Render, mantenha 'https://painel-despesas.onrender.com/api/sign-up'.
             const backendURL = 'https://painel-despesas.onrender.com/api/sign-up'; 
 
             try {
-                // Envia os dados para o backend usando a Fetch API
+                // Envia os dados para o backend usando a Fetch API.
                 const response = await fetch(backendURL, {
-                    method: 'POST', // Método HTTP POST para enviar dados
+                    method: 'POST', // Usa o método POST para enviar dados.
                     headers: {
-                        'Content-Type': 'application/json' // Indica que o corpo da requisição é JSON
+                        'Content-Type': 'application/json' // Informa ao servidor que o corpo da requisição é JSON.
                     },
-                    body: JSON.stringify(formData) // Converte o objeto JS para uma string JSON
+                    body: JSON.stringify(formData) // Converte o objeto JS para uma string JSON.
                 });
 
-                const data = await response.json(); // Tenta analisar a resposta como JSON
+                // Tenta analisar a resposta do backend como JSON.
+                const data = await response.json(); 
 
-                if (response.ok) { // Verifica se a resposta foi um sucesso (status 2xx)
+                if (response.ok) { // 'response.ok' é true para status 2xx (sucesso).
                     alert('Cadastro realizado com sucesso! Você pode fazer login agora.');
-                    // Redireciona para a página de login após o cadastro
+                    // Redireciona para a página de login após o cadastro bem-sucedido.
                     window.location.href = 'login.html';
                 } else {
-                    // Se o backend retornou um erro (ex: e-mail já existe, validação)
+                    // Se o backend retornou um erro (status 4xx ou 5xx).
+                    // Exibe a mensagem de erro fornecida pelo backend, se disponível.
                     alert(`Erro no cadastro: ${data.message || 'Ocorreu um erro desconhecido.'}`);
                     console.error('Erro no cadastro (resposta do servidor):', data);
                 }
             } catch (error) {
-                // Captura erros de rede ou outros problemas na requisição
+                // Captura erros de rede (ex: servidor offline, sem conexão) ou outros problemas na requisição.
                 alert('Não foi possível conectar ao servidor. Verifique sua conexão ou tente novamente mais tarde.');
                 console.error('Erro na requisição de cadastro (frontend):', error);
             }
@@ -112,13 +119,13 @@ function setupProfileForm() {
 }
 
 /**
- * Configura o formulário de senha
+ * Configura o formulário de alteração de senha.
  */
 function setupPasswordForm() {
     const passwordForm = document.querySelector('.password-form');
     if (passwordForm) {
         passwordForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Impede o recarregamento padrão da página.
             
             const currentPass = document.getElementById('senha-atual').value;
             const newPass = document.getElementById('nova-senha').value;
@@ -135,24 +142,23 @@ function setupPasswordForm() {
             }
             
             alert('Senha alterada com sucesso!');
-            this.reset();
+            this.reset(); // Limpa os campos do formulário.
         });
     }
 }
 
 /**
- * Configura o link "Primeiro acesso"
+ * Configura o link "Primeiro acesso" para navegação interna na página (se aplicável).
+ * Este é um link que pode levar à seção de perfil/cadastro dentro da mesma página.
  */
 function setupFirstAccessLink() {
-    // Este link é para navegação interna, se houver um link na mesma página
-    // que leva à seção de perfil/cadastro.
     const firstAccessLink = document.getElementById('go-to-profile');
     if (firstAccessLink) {
         firstAccessLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            showSection('profile-content');
+            e.preventDefault(); // Impede o comportamento padrão do link.
+            showSection('profile-content'); // Assume que existe uma seção com ID 'profile-content'.
             
-            // Rola suavemente para o topo da seção
+            // Rola suavemente para a seção visualizada.
             document.getElementById('profile-content').scrollIntoView({
                 behavior: 'smooth'
             });
@@ -161,103 +167,100 @@ function setupFirstAccessLink() {
 }
 
 /**
- * Aplica máscara para campos de formulário
+ * Aplica máscaras de formatação para campos de formulário (CPF e telefone).
  */
 function setupFormMasks() {
-    // Máscara para CPF
+    // Máscara para CPF.
     const cpfField = document.getElementById('cpf');
     if (cpfField) {
         cpfField.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito.
+            value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o primeiro ponto.
+            value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o segundo ponto.
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço.
             e.target.value = value;
         });
     }
     
-    // Máscara para telefone
+    // Máscara para telefone.
     const phoneField = document.getElementById('telefone');
     if (phoneField) {
         phoneField.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-            value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito.
+            value = value.replace(/^(\d{2})(\d)/g, '($1) $2'); // Adiciona parênteses e espaço para DDD.
+            value = value.replace(/(\d)(\d{4})$/, '$1-$2'); // Adiciona o traço para os últimos 4 dígitos.
             e.target.value = value;
         });
     }
 }
 
 /**
- * Verifica a autenticação do usuário
+ * Verifica o estado de autenticação do usuário e redireciona conforme necessário.
+ * Esta função é importante para proteger rotas e garantir a experiência correta do usuário.
  */
 function checkAuthentication() {
     const userToken = localStorage.getItem('userToken');
     const isLoginPage = window.location.pathname.includes('login.html');
-    // Redireciona se não autenticado e não está na página de login
+
+    // Redireciona para a página de login se o usuário não está autenticado e não está na página de login.
     if (!userToken && !isLoginPage) {
         window.location.href = 'login.html';
         return;
     }
     
-    // Redireciona se já autenticado e está na página de login
+    // Redireciona para a página principal (index) se o usuário já está autenticado e está na página de login.
     if (userToken && isLoginPage) {
         window.location.href = 'index.html';
     }
 }
 
 // =============================================
-// INICIALIZAÇÃO DA APLICAÇÃO
+// INICIALIZAÇÃO PRINCIPAL DA APLICAÇÃO
 // =============================================
 
+// Este é o único bloco 'DOMContentLoaded' principal.
+// Ele garante que todas as configurações de JavaScript sejam aplicadas
+// uma vez que o DOM da página esteja completamente carregado.
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica autenticação (se este script for usado em outras páginas, como index.html)
+    // Verifica autenticação (útil para todas as páginas que usam este script, como index.html).
     checkAuthentication();
     
-    // Configurações gerais de navegação e formulários
+    // Configura todas as funcionalidades interativas do site.
     setupMenuNavigation();
     setupLogout();
-    setupProfileForm(); // <-- Esta função agora está correta para o primeiro acesso
+    setupProfileForm(); // Chama a função para configurar o formulário de cadastro/perfil.
     setupPasswordForm();
     setupFirstAccessLink();
     setupFormMasks();
     
-    // Mostra a última seção visitada ou o dashboard por padrão
-    // Isso provavelmente é para a página 'index.html' ou similar, não para 'primeiro_acesso.html'
-    const lastSection = localStorage.getItem('lastVisitedSection') || 'dashboard-content';
-    // showSection(lastSection); // Removido, pois primeiro_acesso.html abre um modal
-});
-
-// Este bloco está duplicado e o que manipula a abertura do modal de primeiro acesso
-// deveria ser mais genérico para a página 'primeiro_acesso.html'
-document.addEventListener('DOMContentLoaded', function() {
-    // Se o modal estiver sendo aberto via #modal-perfil na URL
+    // Lógica específica para a página 'primeiro_acesso.html' para exibir o modal.
+    // Esta parte foi consolidada aqui para evitar duplicação e garantir a ordem.
     if (window.location.hash === '#modal-perfil') {
         const modalPerfil = document.getElementById('modal-perfil');
         if (modalPerfil) {
-            modalPerfil.style.display = 'flex'; // Exibe o modal
+            modalPerfil.style.display = 'flex'; // Exibe o modal se o hash estiver presente.
         }
     }
 
-    // Configura o botão de fechar do modal
+    // Configura o botão de fechar do modal de primeiro acesso.
     const closeBtn = document.querySelector('#modal-perfil .close-btn');
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.preventDefault();
             const modalPerfil = document.getElementById('modal-perfil');
             if (modalPerfil) {
-                modalPerfil.style.display = 'none';
-                history.replaceState(null, '', window.location.pathname); // Limpa o hash da URL
+                modalPerfil.style.display = 'none'; // Esconde o modal.
+                history.replaceState(null, '', window.location.pathname); // Limpa o hash da URL.
             }
         });
     }
-
-    // Código relacionado ao primeiro acesso de perfil, se a página for para isso
+    
+    // Este bloco 'localStorage.getItem('firstAccess')' foi comentado,
+    // pois a lógica de exibição do modal pelo hash da URL é mais direta para 'primeiro_acesso.html'.
+    // showSection(lastSection); // Removido ou comentado, pois não se aplica diretamente a este contexto de modal.
     // if (localStorage.getItem('firstAccess') === 'true') {
-    //     showSection('profile-content'); // Isso esperaria uma seção com ID 'profile-content'
-    //     localStorage.removeItem('firstAccess'); // Opcional: remove a flag após uso
-        
-    //     // Destaca campos obrigatórios - isso é mais CSS do que JS, mas ok
+    //     showSection('profile-content'); 
+    //     localStorage.removeItem('firstAccess'); 
     //     document.querySelectorAll('#profile-content input[required]').forEach(input => {
     //         input.style.border = '2px solid #FFA500';
     //     });
