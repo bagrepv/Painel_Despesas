@@ -82,8 +82,6 @@ function setupProfileForm() {
             };
 
             // URL do endpoint de cadastro no backend.
-            // NOTA: Para testes locais do backend, esta URL pode precisar ser 'http://localhost:5000/api/sign-up'.
-            // Para produção no Render, mantenha 'https://painel-despesas.onrender.com/api/sign-up'.
             const backendURL = 'https://painel-despesas.onrender.com/api/sign-up'; 
 
             try {
@@ -199,48 +197,59 @@ function setupFormMasks() {
  * Esta função é importante para proteger rotas e garantir a experiência correta do usuário.
  */
 function checkAuthentication() {
+    console.log("checkAuthentication: Iniciando verificação de autenticação."); // Log 1
     const userToken = localStorage.getItem('userToken');
+    console.log("checkAuthentication: userToken =", userToken); // Log 2
     const isLoginPage = window.location.pathname.includes('login.html');
-    // Adiciona uma nova verificação para a página de primeiro acesso
+    console.log("checkAuthentication: isLoginPage =", isLoginPage); // Log 3
     const isPrimeiroAcessoPage = window.location.pathname.includes('primeiro_acesso.html');
+    console.log("checkAuthentication: isPrimeiroAcessoPage =", isPrimeiroAcessoPage); // Log 4
 
     // Redireciona para a página de login se o usuário não está autenticado
     // E não está na página de login OU na página de primeiro acesso.
-    if (!userToken && !isLoginPage && !isPrimeiroAcessoPage) { // <-- Condição MODIFICADA
+    if (!userToken && !isLoginPage && !isPrimeiroAcessoPage) { 
+        console.log("checkAuthentication: Redirecionando para login.html (Usuário não autenticado em página protegida)."); // Log 5
         window.location.href = 'login.html';
         return;
     }
     
     // Opcional: Redireciona para a página principal (index) se já está autenticado
     // e tentar acessar a página de login OU a página de primeiro acesso.
-    if (userToken && (isLoginPage || isPrimeiroAcessoPage)) { // <-- Condição Opcional MODIFICADA
+    if (userToken && (isLoginPage || isPrimeiroAcessoPage)) { 
+        console.log("checkAuthentication: Redirecionando para index.html (Usuário autenticado em página de login/cadastro)."); // Log 6
         window.location.href = 'index.html';
     }
+    console.log("checkAuthentication: Nenhuma regra de redirecionamento aplicada."); // Log 7
 }
+
+// =============================================
 // INICIALIZAÇÃO PRINCIPAL DA APLICAÇÃO
 // =============================================
 
-// Este é o único bloco 'DOMContentLoaded' principal.
-// Ele garante que todas as configurações de JavaScript sejam aplicadas
-// uma vez que o DOM da página esteja completamente carregado.
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica autenticação (útil para todas as páginas que usam este script, como index.html).
-    checkAuthentication();
+    console.log("DOMContentLoaded: DOM completamente carregado."); // Log 8
     
+    // Verifica autenticação (útil para todas as páginas que usam este script, como index.html).
+    checkAuthentication(); // Esta chamada ativa a depuração da função
+
+    console.log("DOMContentLoaded: Chamando funções de setup."); // Log 9
     // Configura todas as funcionalidades interativas do site.
     setupMenuNavigation();
     setupLogout();
-    setupProfileForm(); // Chama a função para configurar o formulário de cadastro/perfil.
+    setupProfileForm(); 
     setupPasswordForm();
     setupFirstAccessLink();
     setupFormMasks();
     
     // Lógica específica para a página 'primeiro_acesso.html' para exibir o modal.
-    // Esta parte foi consolidada aqui para evitar duplicação e garantir a ordem.
+    console.log("DOMContentLoaded: Verificando hash para modal de primeiro acesso."); // Log 10
     if (window.location.hash === '#modal-perfil') {
         const modalPerfil = document.getElementById('modal-perfil');
         if (modalPerfil) {
+            console.log("DOMContentLoaded: Exibindo modal de perfil."); // Log 11
             modalPerfil.style.display = 'flex'; // Exibe o modal se o hash estiver presente.
+        } else {
+            console.log("DOMContentLoaded: Modal de perfil não encontrado no DOM."); // Log 12
         }
     }
 
@@ -251,20 +260,10 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const modalPerfil = document.getElementById('modal-perfil');
             if (modalPerfil) {
+                console.log("Modal de perfil: Fechando modal."); // Log 13
                 modalPerfil.style.display = 'none'; // Esconde o modal.
                 history.replaceState(null, '', window.location.pathname); // Limpa o hash da URL.
             }
         });
     }
-    
-    // Este bloco 'localStorage.getItem('firstAccess')' foi comentado,
-    // pois a lógica de exibição do modal pelo hash da URL é mais direta para 'primeiro_acesso.html'.
-    // showSection(lastSection); // Removido ou comentado, pois não se aplica diretamente a este contexto de modal.
-    // if (localStorage.getItem('firstAccess') === 'true') {
-    //     showSection('profile-content'); 
-    //     localStorage.removeItem('firstAccess'); 
-    //     document.querySelectorAll('#profile-content input[required]').forEach(input => {
-    //         input.style.border = '2px solid #FFA500';
-    //     });
-    // }
 });
