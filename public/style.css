@@ -30,25 +30,25 @@ body {
     flex-shrink: 0; /* Impede a sidebar de encolher */
 }
 
-/* Main Content: Estilos da area de conteudo principal */
-.main-content {
-    margin-left: 230px; /* Desloca o conteudo para a direita para a sidebar fixa */
-    flex: 1; /* Permite que ocupe o restante do espaco horizontal */
-    flex-grow: 1; /* Garante que ocupe todo o espaco disponivel */
-    flex-basis: 0; /* Trabalha com flex-grow para distribuicao de espaco */
+ 
+/* .main-content {
+    margin-left: 230px; 
+    flex: 1; 
+    flex-grow: 1; 
+    flex-basis: 0; 
     padding: 30px;
-    min-height: 100vh; /* Garante que ocupe a altura total da viewport */
-    background-color: white; /* Cor de fundo para a area de conteudo */
+    min-height: 100vh; 
+    background-color: white; 
     box-sizing: border-box; 
     display: flex; 
     flex-direction: column; 
-    align-items: center; /* Centraliza o conteudo horizontalmente */
-    justify-content: flex-start; /* Alinha o conteudo ao topo */
-    overflow-y: auto; /* Adiciona scroll se o conteudo for maior que a tela */
-}
+    align-items: center; 
+    justify-content: flex-start; 
+    overflow-y: auto; 
+} */ 
 
-/* Dashboard Content: Estilos especificos para a secao do Dashboard */
-#dashboard-content {
+
+/* #dashboard-content {
     width: 100%; 
     display: flex; 
     flex-direction: column; 
@@ -57,7 +57,7 @@ body {
     padding: 20px; 
     box-sizing: border-box; 
     border-radius: 8px; 
-}
+} */
 
 /* Welcome Message: Estilos para a mensagem de boas-vindas no dashboard */
 .welcome-message {
