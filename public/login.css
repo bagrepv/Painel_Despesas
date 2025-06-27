@@ -1,192 +1,178 @@
-/* Reset e Estilos Base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
+/* Estilos gerais para o body da pagina de login */
 body {
-    background-color: #2563eb;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #2563eb; /* Fundo azul para a pagina de login */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 40px;
-}
-
-/* Container Principal */
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    padding: 30px;
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-.login-container:hover {
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
-}
-
-/* Cabeçalho */
-.login-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.login-header h1 {
-    font-size: 24px;
+    justify-content: center; /* Centraliza o conteudo horizontalmente */
+    align-items: center; /* Centraliza o conteudo verticalmente */
+    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
     color: #333;
+    box-sizing: border-box;
 }
 
-/* Formulário */
-.login-form {
+/* Container principal do login */
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    width: 100%;
+    max-width: 400px; /* Largura maxima para o container de login */
+    text-align: center;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 25px;
-}
-
-/* Grupos de Formulário */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form-group label {
-    font-size: 14px;
-    color: #555;
-    font-weight: bold;
-}
-
-.form-group input[type="email"],
-.form-group input[type="password"] {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border 0.2s, box-shadow 0.2s;
-}
-
-.form-group input:focus {
-    outline: none;
-    border: 1.5px solid #357efd;
-    box-shadow: 0 0 6px rgba(53, 126, 253, 0.4);
-}
-
-/* Termos e Condições */
-.terms {
-    flex-direction: row;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0;
 }
 
-.terms input[type="checkbox"] {
-    width: auto;
-}
-
-/* Botão de Login */
-.login-button {
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.login-button:hover {
-    background-color: #3367d6;
-    transform: scale(1.02);
-}
-
-/* Primeiro Acesso */
-.first-access {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.first-access a {
-    color: #4285f4;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.first-access a:hover {
-    text-decoration: underline;
-}
-
-/* Link: Esqueceu a senha */
-.forgot-password-link {
-    font-size: 12px;
-    color: #1976d2;
-    text-decoration: none;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.forgot-password-link:hover {
-    text-decoration: underline;
-    color: #0d47a1;
-}
-
-/* Responsividade */
-@media (max-width: 480px) {
-    .login-container {
-        padding: 20px;
-    }
-
-    .form-group input {
-        font-size: 15px;
-    }
-
-    .login-button {
-        font-size: 15px;
-    }
-}
-
-/* Logo */
+/* Cabecalho do formulario (logo e texto) */
 .form-header {
-    text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column; /* Alinha o logo e o texto verticalmente */
+    align-items: center; /* Centraliza itens */
+    width: 100%;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    justify-content: center; /* Centraliza logo e texto DGGP */
+    gap: 10px; /* Espaco entre logo e texto */
+    margin-bottom: 10px;
 }
 
-.sidebar-logo {
-    height: 50px;
-    width: auto;
+.sidebar-logo { /* Reutiliza a classe, mas pode ter um tamanho especifico para o login */
+    height: 60px; /* Tamanho maior para o logo no login */
+    filter: brightness(0) invert(0); /* Nao inverte a cor se o logo ja for escuro */
 }
 
-.logo h1 {
-    font-size: 24px;
-    color: #2c3e50;
+.logo h3 {
     margin: 0;
+    font-size: 1.5em;
+    color: #333;
+    background-color: rgb(224, 221, 22); /* Fundo amarelo para "Diretoria de Gestao" */
+    padding: 2px 5px;
+    border-radius: 4px;
+    display: inline-block; /* Para o background se ajustar ao texto */
 }
 
-/* Ícones (caso use Material Icons ou Font Awesome) */
-.icon {
+.logo h4 {
+    margin: 0;
+    font-size: 1.1em;
     color: #555;
-    font-size: 20px;
+}
+
+/* Estilo do formulario de login */
+.login-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinha labels a esquerda */
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-group label .material-icons {
     margin-right: 8px;
-    vertical-align: middle;
+    color: #2563eb; /* Cor dos icones */
+    font-size: 20px;
 }
 
-.forgot-password-wrapper {
-    
-    margin-top: -15px; /* sobe um pouco para ficar mais próximo do campo */
-    margin-bottom: 10px; /* espaçamento antes do botão */
+.form-group input {
+    width: calc(100% - 22px); /* Ajusta largura para considerar padding */
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Garante que padding nao aumente a largura */
 }
 
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb; /* Borda azul ao focar */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Sombra suave ao focar */
+}
+
+/* Link Esqueceu a Senha? */
+.forgot-password-link {
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+    color: #1e3a8a;
+}
+
+/* Botao de Login */
+.login-button {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #1e3a8a;
+}
+
+.login-button .material-icons {
+    font-size: 20px;
+}
+
+/* Rodape do formulario (Primeiro Acesso) */
+.form-footer {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    width: 100%;
+}
+
+.first-access a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.first-access a:hover {
+    color: #1e3a8a;
+    text-decoration: underline;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 600px) {
+    .login-container {
+        margin: 20px;
+        padding: 20px;
+    }
+    .logo h3 {
+        font-size: 1.2em;
+    }
+    .logo h4 {
+        font-size: 1em;
+    }
+}
