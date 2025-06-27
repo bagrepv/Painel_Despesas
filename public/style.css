@@ -35,15 +35,16 @@ body {
 }
 
 #dashboard-content {
-    width: 100%; /* Garante que a secao dashboard-content ocupe a largura total do main-content */
-    display: flex; /* Usar flexbox para alinhar o conteudo interno */
-    flex-direction: column; /* Conteudo em coluna */
-    align-items: center; /* Centraliza a imagem e o texto horizontalmente */
-    justify-content: center; /* Centraliza verticalmente se houver espaco */
-    padding: 20px; /* Padding interno para o conteudo do dashboard */
+    max-width: 1000px; /* Limita o tamanho do conteúdo */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente o conteúdo */
+    justify-content: center;
     box-sizing: border-box;
-    border-radius: 8px; /* Cantos arredondados */
 }
+
 
 .welcome-message {
     text-align: center; /* Centraliza o texto */
@@ -54,13 +55,15 @@ body {
 }
 
 .dashboard-image {
-    max-width: 80%; /* Pode reduzir a largura da imagem para nao preencher 100% */
+    max-width: 600px;
+    width: 100%;
     height: auto;
-    display: block; /* Garante que o margin: auto funcione */
-    margin: 20px auto; /* Centraliza a imagem e da espaco vertical */
-    border-radius: 8px; /* Cantos arredondados, opcional */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra, opcional */
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
 
 /* Estilos gerais para titulos e paragrafos */
 h1, h2, h3, h4, h5, h6 {
@@ -81,7 +84,9 @@ p {
     gap: 15px;
     padding: 20px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 30px; /* <-- Adicione esta linha */
 }
+
 
 .sidebar-logo {
     height: 40px;
