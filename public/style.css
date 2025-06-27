@@ -5,7 +5,7 @@ body {
     margin: 0;
     /* Considere carregar uma fonte mais moderna do Google Fonts e usa-la aqui */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #bb0a0a; /* Cor de fundo geral da pagina */
+    background: #faf5f5; /* Cor de fundo geral da pagina */
     min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
 }
 
