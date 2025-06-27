@@ -1,141 +1,223 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel DIGAP</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel DIGAP</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
+  
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo DGGP" class="sidebar-logo">
+            <div class="logo">
+                <h2>DIGAP</h2>
+            </div>
+        </div>
+        
+        <ul class="menu">
+            <li>
+                <a href="#" data-section="dashboard-content">
+                    <span class="material-icons">home</span>
+                    <span class="menu-text">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="profile-content">
+                    <span class="material-icons">person</span>
+                    <span class="menu-text">Perfil</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="receita-2025">
+                    <span class="material-icons">signal_cellular_alt</span>
+                    <span class="menu-text">Receita e Despesa</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="fpe-fundeb">
+                    <span class="material-icons">account_balance</span>
+                    <span class="menu-text">FPE e Fundeb</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="despesa-2024">
+                    <span class="material-icons">tv</span>
+                    <span class="menu-text">Apresentação Mensal</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="despesa-2023">
+                    <span class="material-icons">receipt</span>
+                    <span class="menu-text">Resultados Fiscais</span>
+                </a>
+            </li>
+            <li class="logout">
+                <a href="#">
+                    <span class="material-icons">logout</span>
+                    <span class="menu-text">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-  <div class="sidebar">
-    <div class="logo-container">
-      <img src="logo.png" alt="Logo DGGP" class="sidebar-logo">
-      <div class="logo">
-        <h2>DIGAP</h2>
-      </div>
-    </div>
-
-    <ul class="menu">
-      <li><a href="#" data-section="dashboard-content">
-        <span class="material-icons">home</span>
-        <span class="menu-text">Home</span>
-      </a></li>
-      <li><a href="#" data-section="profile-content">
-        <span class="material-icons">person</span>
-        <span class="menu-text">Perfil</span>
-      </a></li>
-      <li><a href="#" data-section="receita-2025">
-        <span class="material-icons">signal_cellular_alt</span>
-        <span class="menu-text">Receita e Despesa</span>
-      </a></li>
-      <li><a href="#" data-section="fpe-fundeb">
-        <span class="material-icons">account_balance</span>
-        <span class="menu-text">FPE e Fundeb</span>
-      </a></li>
-      <li><a href="#" data-section="despesa-2024">
-        <span class="material-icons">tv</span>
-        <span class="menu-text">Apresentação Mensal</span>
-      </a></li>
-      <li><a href="#" data-section="despesa-2023">
-        <span class="material-icons">receipt</span>
-        <span class="menu-text">Resultados Fiscais</span>
-      </a></li>
-      <li class="logout"><a href="#">
-        <span class="material-icons">logout</span>
-        <span class="menu-text">Sair</span>
-      </a></li>
-    </ul>
-  </div>
-
-  <div class="main-content">
-    <div id="dashboard-content" class="content-section active">
-      <div class="welcome-message">
+    <div class="main-content">
+        <!-- Conteúdo do Dashboard - AGORA É ÚNICO E ESTÁ AQUI -->
+        <div id="dashboard-content" class="content-section active">
+    <div class="welcome-message">
         <img src="Site DIGAP_Home.png" alt="Mensagem de boas-vindas" class="dashboard-image">
-      </div>
     </div>
+</div>
 
-    <div id="profile-content" class="content-section">
-      <div class="profile-container">
-        <h1><span class="material-icons">person</span> Perfil do Usuário</h1>
 
-        <form class="profile-form" id="profileForm">
-          <div class="form-section">
-            <h2>Informações Pessoais</h2>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="nome_profile"><span class="material-icons">badge</span> Nome Completo</label>
-                <input type="text" id="nome_profile" name="nome_profile" required>
-              </div>
-              <div class="form-group">
-                <label for="cpf_profile"><span class="material-icons">fingerprint</span> CPF</label>
-                <input type="text" id="cpf_profile" name="cpf_profile" required>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="email_profile"><span class="material-icons">email</span> E-mail</label>
-                <input type="email" id="email_profile" name="email_profile" required>
-              </div>
-              <div class="form-group">
-                <label for="telefone_profile"><span class="material-icons">phone</span> Telefone</label>
-                <input type="tel" id="telefone_profile" name="telefone_profile">
-              </div>
-            </div>
-          </div>
+        <!-- Conteúdo do Perfil do Usuário -->
+        <div id="profile-content" class="content-section">
+            <div class="profile-container">
+                <h1><span class="material-icons">person</span> Perfil do Usuário</h1>
+                
+                <!-- Removido action="perfil.php" e method="post" pois a submissão será via JS -->
+                <form class="profile-form" id="profileForm"> <!-- ADICIONADO ID AQUI -->
+                    <div class="form-section">
+                        <h2>Informações Pessoais</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome_profile"><span class="material-icons">badge</span> Nome Completo</label>
+                                <input type="text" id="nome_profile" name="nome_profile" required> <!-- ID ÚNICO -->
+                            </div>
+                            <div class="form-group">
+                                <label for="cpf_profile"><span class="material-icons">fingerprint</span> CPF</label>
+                                <input type="text" id="cpf_profile" name="cpf_profile" required> <!-- ID ÚNICO -->
+                            </div>
+                            <!-- REMOVIDO: Campo de senha duplicado aqui. Senha é alterada em outra seção. -->
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email_profile"><span class="material-icons">email</span> E-mail</label>
+                                <input type="email" id="email_profile" name="email_profile" required> <!-- ID ÚNICO -->
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone_profile"><span class="material-icons">phone</span> Telefone</label>
+                                <input type="tel" id="telefone_profile" name="telefone_profile"> <!-- ID ÚNICO -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2>Informações Profissionais</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="orgao_profile"><span class="material-icons">business</span> Órgão</label>
+                                <input type="text" id="orgao_profile" name="orgao_profile" required> <!-- ID ÚNICO -->
+                            </div>
+                            <div class="form-group">
+                                <label for="setor_profile"><span class="material-icons">groups</span> Setor</label>
+                                <input type="text" id="setor_profile" name="setor_profile" required> <!-- ID ÚNICO -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cargo_profile"><span class="material-icons">work</span> Cargo/Função</label>
+                            <input type="text" id="cargo_profile" name="cargo_profile" required> <!-- ID ÚNICO -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            <span class="material-icons">save</span> Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Seção de Alteração de Senha (adicionada) -->
+                <div class="password-section">
+                    <h2>Alterar Senha</h2>
+                    <form class="password-form" id="passwordForm"> <!-- ADICIONADO ID AQUI -->
+                        <div class="form-group">
+                            <label for="senha-atual"><span class="material-icons">lock</span> Senha Atual</label>
+                            <input type="password" id="senha-atual" name="senha-atual">
+                        </div>
+                        <div class="form-group">
+                            <label for="nova-senha"><span class="material-icons">lock</span> Nova Senha</label>
+                            <input type="password" id="nova-senha" name="nova-senha">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmar-senha"><span class="material-icons">lock</span> Confirmar Senha</label>
+                            <input type="password" id="confirmar-senha" name="confirmar-senha">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save">
+                                <span class="material-icons">save</span> Alterar Senha
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seções de Conteúdo (Receita, FPE, Despesa, etc.) -->
+        <div id="receita-2025" class="content-section">
+            <div class="powerbi-container">
+                <h2><span class="material-icons">trending_up</span> Receita 2025</h2>
+                <div class="powerbi-embed">
+                    <iframe 
+                        title="Painel de Análises_teste final - Copia" 
+                        src="https://app.powerbi.com/view?r=eyJrIjoiMjhlMzc2MWItNTkxNC00YjBhLWJiNDItMDE0YzE1MTJkZjY3IiwidCI6ImE0NjA1ZTZmLTQ5MTktNGI2Zi1iNjZlLThlMWNhMTdjMDJjYyJ9"
+                        frameborder="0" 
+                        allowFullScreen="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
 
-          <div class="form-section">
-            <h2>Informações Profissionais</h2>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="orgao_profile"><span class="material-icons">business</span> Órgão</label>
-                <input type="text" id="orgao_profile" name="orgao_profile" required>
-              </div>
-              <div class="form-group">
-                <label for="setor_profile"><span class="material-icons">groups</span> Setor</label>
-                <input type="text" id="setor_profile" name="setor_profile" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="cargo_profile"><span class="material-icons">work</span> Cargo/Função</label>
-              <input type="text" id="cargo_profile" name="cargo_profile" required>
-            </div>
-          </div>
+        <div id="fpe-fundeb" class="content-section">
+            <div class="powerbi-container">
+                <h2><span class="material-icons">trending_up</span> FPE e Fundeb</h2>
+                <div class="powerbi-embed">
+                    <iframe 
+                        src="Painel de FPE-Fundeb_Gestor 2.pdf" 
+                        width="100%" 
+                        height="600px" 
+                        frameborder="0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
 
-          <div class="form-actions">
-            <button type="submit" class="btn-save">
-              <span class="material-icons">save</span> Salvar Alterações
-            </button>
-          </div>
-        </form>
+        <div id="despesa-2024" class="content-section">
+            <div class="powerbi-container">
+                <h2><span class="material-icons">trending_up</span>Apresentação Mensal</h2>
+                <div class="powerbi-embed">
+                    <iframe 
+                        src="Apresentação mensal.pdf" 
+                        width="100%" 
+                        height="600px" 
+                        frameborder="0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
 
-        <div class="password-section">
-          <h2>Alterar Senha</h2>
-          <form class="password-form" id="passwordForm">
-            <div class="form-group">
-              <label for="senha-atual"><span class="material-icons">lock</span> Senha Atual</label>
-              <input type="password" id="senha-atual" name="senha-atual">
-            </div>
-            <div class="form-group">
-              <label for="nova-senha"><span class="material-icons">lock</span> Nova Senha</label>
-              <input type="password" id="nova-senha" name="nova-senha">
-            </div>
-            <div class="form-group">
-              <label for="confirmar-senha"><span class="material-icons">lock</span> Confirmar Senha</label>
-              <input type="password" id="confirmar-senha" name="confirmar-senha">
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn-save">
-                <span class="material-icons">save</span> Alterar Senha
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div id="despesa-2023" class="content-section">
+            <div class="powerbi-container">
+                <h2><span class="material-icons">trending_up</span>Resultados Fiscais</h2>
+                <div class="powerbi-embed">
+                    <iframe 
+                        src="Resultados Fiscais 2025 - 1º Quadrimestre.pdf" 
+                        width="100%" 
+                        height="600px" 
+                        frameborder="0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
 
-  <script src="script.js"></script>
+    </div>
+
+<script src="script.js"></script>
 </body>
 </html>
