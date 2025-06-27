@@ -375,5 +375,38 @@ input[readonly] {
     background: #2980b9;
 }
 
+/* Garante que o texto do menu apareça corretamente */
+.menu-text {
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+/* Garante a largura correta da sidebar */
+.sidebar {
+    width: 230px !important;
+    min-width: 230px !important;
+}
+
+/* Garante que o conteúdo principal respeite a sidebar */
+.main-content {
+    margin-left: 230px !important;
+}
+
+/* Estilo opcional para evitar colapsar o menu com responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        z-index: 10;
+        width: 230px;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+}
+
+
 
 
