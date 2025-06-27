@@ -1,0 +1,69 @@
+/* test.css: Ficheiro CSS para Teste de Carregamento */
+
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif; /* Uma fonte bem basica */
+    background-color: #ff0000 !important; /* VERMELHO BERRANTE para o fundo do body */
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 230px !important; /* Garante largura */
+    height: 100vh !important;
+    background-color: #0000ff !important; /* AZUL FORTE para a sidebar */
+    color: white !important;
+    position: fixed !important;
+    box-sizing: border-box !important;
+    padding-top: 20px !important;
+}
+
+.main-content {
+    margin-left: 230px !important;
+    flex: 1 !important;
+    padding: 30px !important;
+    min-height: 100vh !important;
+    background-color: #00ff00 !important; /* VERDE FORTE para o conteudo principal */
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow-y: auto !important;
+}
+
+/* Estilos para o logo dentro da sidebar (se estiverem la) */
+.logo-container {
+    width: 100% !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+.logo h2 {
+    color: white !important;
+    font-size: 2em !important;
+    margin: 0 !important;
+}
+
+/* Estilos para os itens do menu da sidebar */
+.menu {
+    list-style: none !important;
+    padding: 20px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.menu li a {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 20px !important;
+    color: yellow !important; /* AMARELO para os links */
+    text-decoration: none !important;
+    width: 100% !important; /* Garante que os links preenchem o espaco */
+    box-sizing: border-box !important;
+}
+.menu li a:hover, .menu li a.active {
+    background-color: rgba(255,255,255,0.2) !important;
+}
