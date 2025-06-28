@@ -154,6 +154,7 @@ body {
 /* Seções e Forms */
 .content-section {
     display: none;
+    text-align: center;
 }
 .content-section.active {
     display: block;
