@@ -88,6 +88,35 @@ app.post('/api/sign-up', async (req, res) => {
     }
 });
 
+// NOVO: Rota para Alteracao/Redefinicao de Senha
+app.post('/api/reset-password', async (req, res) => {
+    try {
+        const { email, novaSenha } = req.body;
+
+        // 1. Verificar se o usuario existe pelo email
+        const [users] = await db.query('SELECT id FROM usuarios WHERE email = ?', [email]);
+        const user = users[0];
+
+        if (!user) {
+            return res.status(404).json({ message: 'E-mail nao encontrado.' });
+        }
+
+        // 2. Hashear a nova senha
+        const hashNovaSenha = await bcrypt.hash(novaSenha, 10);
+
+        // 3. Atualizar a senha no banco de dados
+        //    IMPORTANTE: Sempre use WHERE para evitar atualizar todos os usuarios!
+        await db.query('UPDATE usuarios SET senha = ? WHERE id = ?', [hashNovaSenha, user.id]);
+
+        res.json({ message: 'Senha atualizada com sucesso!' });
+
+    } catch (error) {
+        console.error('Erro ao redefinir senha:', error);
+        res.status(500).json({ message: 'Ocorreu um erro ao redefinir a senha.' });
+    }
+});
+
+
 // =========================================================
 // ROTA PARA SERVIR O ARQUIVO HTML PRINCIPAL (se necessário)
 // Geralmente, o express.static já resolve para /
