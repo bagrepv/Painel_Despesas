@@ -83,7 +83,7 @@ function setupProfileForm() {
 
             // URL do endpoint de cadastro no backend.
             const backendURL = 'https://painel-despesas.onrender.com/api/sign-up'; 
-
+           // const backendURL = 'https://painel-despesas.onrender.com/api/sign-up';
             try {
                 // Envia os dados para o backend usando a Fetch API.
                 const response = await fetch(backendURL, {
