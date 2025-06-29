@@ -1,18 +1,22 @@
-/* Estilos para a pagina de recuperacao de senha */
+/* Reset e base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #1976d2; /* Fundo azul para a pagina */
+  background-color: #1976d2;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
 }
 
 .password-section {
   background-color: #ffffff;
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -25,11 +29,12 @@ body {
   gap: 8px;
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  text-align: center;
+  
+  color: #333;
 }
 
 .password-form .form-group {
-  margin-bottom: -20px; /* NOVO: Espacamento reduzido para 10px */
+  margin-bottom: 16px;
 }
 
 .password-form label {
@@ -37,7 +42,8 @@ body {
   align-items: center;
   gap: 8px;
   font-weight: bold;
-
+  margin-bottom: 4px;
+  color: #333;
 }
 
 .password-form input {
@@ -46,20 +52,18 @@ body {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
-  margin: 0; /* NOVO: Remove margens padrao do input */
-  box-sizing: border-box; /* NOVO: Garante que padding nao adicione largura */
 }
 
 .form-actions {
-  text-align: right;
-  margin-top: 1.5rem;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .btn-change {
-  background-color: #007bff; /* Cor primaria do botao */
+  background-color: #007bff;
   color: white;
   border: none;
-  padding: 10px 16px;
+  padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
@@ -70,7 +74,7 @@ body {
 }
 
 .btn-change:hover {
-  background-color: #0056b3; /* Cor do botao ao passar o mouse */
+  background-color: #0056b3;
 }
 
 .material-icons {

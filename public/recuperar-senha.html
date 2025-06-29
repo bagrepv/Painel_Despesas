@@ -1,46 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alteração de Senha</title>
-
-  
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="recuperar_senha.css"> 
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alteração de Senha</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="recuperar_senha.css">
 </head>
 <body>
-  <div class="password-section">
-    <h2><span class="material-icons">lock</span> Alteração de Senha</h2>
-    
-    <!-- ID do formulário para JavaScript. Removido action/method para evitar submit padrão. -->
-    <form class="password-form" id="resetPasswordForm"> 
+  <div class="password-section">
+    <h2><span class="material-icons">lock</span> Alterar sua Senha</h2>
 
-      <div class="form-group">
-        <label for="email_recuperacao"><span class="material-icons">alternate_email</span> Email Cadastrado</label>
-        <input type="email" id="email_recuperacao" name="email_recuperacao" required> <!-- ID e TIPO CORRIGIDOS -->
-      </div>
-      
-      <div class="form-group">
-        <label for="nova-senha_recuperacao"><span class="material-icons">lock_reset</span> Nova Senha</label>
-        <input type="password" id="nova-senha_recuperacao" name="nova-senha_recuperacao" required> <!-- ID CORRIGIDO -->
-      </div>
-      
-      <div class="form-group">
-        <label for="confirmar-senha_recuperacao"><span class="material-icons">done_all</span> Confirmar Nova Senha</label>
-        <input type="password" id="confirmar-senha_recuperacao" name="confirmar-senha_recuperacao" required> <!-- ID CORRIGIDO -->
-      </div>
-      
-      <div class="form-actions">
-        <button type="submit" class="btn-change">
-          <span class="material-icons">autorenew</span> Alterar Senha
-        </button>
-      </div>
-    </form>
-  </div>
+    <form class="password-form" id="resetPasswordForm">
+      <div class="form-group">
+        <label for="email_recuperacao"><span class="material-icons">alternate_email</span> Email Cadastrado</label>
+        <input type="email" id="email_recuperacao" name="email_recuperacao" required />
+      </div>
 
-  <!-- Script JavaScript para a lógica de alteração de senha -->
-  <script src="recuperar_senha_script.js"></script>
+      <div class="form-group">
+        <label for="nova-senha_recuperacao"><span class="material-icons">lock_reset</span> Nova Senha</label>
+        <input type="password" id="nova-senha_recuperacao" name="nova-senha_recuperacao" required />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmar-senha_recuperacao"><span class="material-icons">done_all</span> Confirmar Nova Senha</label>
+        <input type="password" id="confirmar-senha_recuperacao" name="confirmar-senha_recuperacao" required />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-change">
+          <span class="material-icons">autorenew</span> Alterar Senha
+        </button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
