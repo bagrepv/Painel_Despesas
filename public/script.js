@@ -57,6 +57,8 @@ function setupLogout() {
     }
 }
 
+// REMOVIDO: Funcoes displayGeneralMessage, displayInputError, clearAllMessages
+
 /**
  * Configura o formulário de perfil, que agora também é usado para o "Primeiro Acesso" (cadastro).
  * Lida com a submissão do formulário, coleta dados e os envia para o backend.
@@ -81,10 +83,30 @@ function setupProfileForm() {
                 cargo: document.getElementById('cargo').value
             };
 
-            // URL do endpoint de cadastro no backend.
-            const backendURL = 'https://painel-despesas.onrender.com/api/sign-up';
-           // const backendURL = 'https://painel-despesas.onrender.com/api/sign-up';
-           //const backendURL = 'http://localhost:5000/api/sign-up';
+            // Validacoes (agora usando alert() novamente)
+            if (!formData.nome) { alert('Nome é obrigatório.'); return; }
+            if (!formData.cpf) { alert('CPF é obrigatório.'); return; }
+            if (!formData.email) { alert('Email é obrigatório.'); return; }
+            if (!formData.email.includes('@') || !formData.email.includes('.')) {
+                alert('Email inválido.');
+                return;
+            }
+            if (!formData.senha || formData.senha.length < 6) {
+                alert('Senha deve ter no mínimo 6 caracteres.');
+                return;
+            }
+            if (!formData.orgao) { alert('Órgão é obrigatório.'); return; }
+            if (!formData.setor) { alert('Setor é obrigatório.'); return; }
+            if (!formData.cargo) { alert('Cargo é obrigatório.'); return; }
+
+
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // ATENCAO: Ajuste esta URL conforme o ambiente:
+            // Para TESTE LOCAL: 'http://localhost:5000/api/sign-up'
+            // Para PRODUCAO (Render): 'https://painel-despesas.onrender.com/api/sign-up'
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            const backendURL = 'https://painel-despesas.onrender.com/api/sign-up'; // ATUALMENTE CONFIGURADO PARA TESTE LOCAL
+            
             try {
                 // Envia os dados para o backend usando a Fetch API.
                 const response = await fetch(backendURL, {
@@ -99,9 +121,10 @@ function setupProfileForm() {
                 const data = await response.json(); 
 
                 if (response.ok) { // 'response.ok' é true para status 2xx (sucesso).
-                    alert('Cadastro realizado com sucesso! Você pode fazer login agora.');
-                    // Redireciona para a página de login após o cadastro bem-sucedido.
-                    window.location.href = 'login.html';
+                    alert('Cadastro realizado com sucesso! Você pode fazer login agora.'); 
+                    setTimeout(() => {
+                        window.location.href = 'login.html'; 
+                    }, 2000); 
                 } else {
                     // Se o backend retornou um erro (status 4xx ou 5xx).
                     // Exibe a mensagem de erro fornecida pelo backend, se disponível.
@@ -118,18 +141,23 @@ function setupProfileForm() {
 }
 
 /**
- * Configura o formulário de alteração de senha.
+ * Configura o formulário de alteração de senha (dentro de Perfil, index.html).
  */
 function setupPasswordForm() {
     const passwordForm = document.querySelector('.password-form');
     if (passwordForm) {
-        passwordForm.addEventListener('submit', function(e) {
+        passwordForm.addEventListener('submit', async function(e) { // Adicionado 'async'
             e.preventDefault(); // Impede o recarregamento padrão da página.
             
             const currentPass = document.getElementById('senha-atual').value;
             const newPass = document.getElementById('nova-senha').value;
             const confirmPass = document.getElementById('confirmar-senha').value;
             
+            // Validacoes
+            if (!currentPass) { alert('Senha atual é obrigatória.'); return; }
+            if (!newPass) { alert('Nova senha é obrigatória.'); return; }
+            if (!confirmPass) { alert('Confirmação de senha é obrigatória.'); return; }
+
             if (newPass !== confirmPass) {
                 alert('As senhas não coincidem!');
                 return;
@@ -139,8 +167,10 @@ function setupPasswordForm() {
                 alert('A senha deve ter pelo menos 6 caracteres!');
                 return;
             }
-            
-            alert('Senha alterada com sucesso!');
+
+            // AQUI VOCE ADICIONARIA A LOGICA DE ENVIO PARA O BACKEND PARA ATUALIZAR A SENHA DO PERFIL
+            // Por enquanto, apenas um feedback local
+            alert('Senha alterada com sucesso (apenas localmente)!');
             this.reset(); // Limpa os campos do formulário.
         });
     }
@@ -187,7 +217,7 @@ function setupFormMasks() {
         phoneField.addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito.
             value = value.replace(/^(\d{2})(\d)/g, '($1) $2'); // Adiciona parênteses e espaço para DDD.
-            value = value.replace(/(\d)(\d{4})$/, '$1-$2'); // Adiciona o traço para os últimos 4 dígitos.
+            value = value = value.replace(/(\d)(\d{4})$/, '$1-$2'); // Adiciona o traço para os últimos 4 dígitos.
             e.target.value = value;
         });
     }
@@ -234,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkAuthentication(); // Esta chamada ativa a depuração da função
 
     console.log("DOMContentLoaded: Chamando funções de setup."); // Log 9
-    // Configura todas as funcionalidades interativas do site.
+    // Configura todas as funcionalidades interativas da aplicação.
     setupMenuNavigation();
     setupLogout();
     setupProfileForm(); 
