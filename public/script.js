@@ -121,7 +121,7 @@ function setupProfileForm() {
                 const data = await response.json(); 
 
                 if (response.ok) { // 'response.ok' é true para status 2xx (sucesso).
-                    alert('Cadastro realizado com sucesso! Você pode fazer login agora.'); 
+                    alert('Cadastro realizado. Aguardar Aprovação'); 
                     setTimeout(() => {
                         window.location.href = 'login.html'; 
                     }, 2000); 
