@@ -1,38 +1,44 @@
-// Este script contem a logica para a pagina de recuperacao de senha.
-
-// Funcao auxiliar para exibir mensagens gerais (sucesso, erro, aviso)
+// Exibe mensagens gerais de sucesso ou erro
 function displayMessage(type, message) {
     const generalMessageDiv = document.getElementById('general-message');
+    if (!generalMessageDiv) return;
+
     generalMessageDiv.textContent = message;
-    generalMessageDiv.className = `message-display ${type}`; // Adiciona a classe de tipo (success, error, warning)
-    generalMessageDiv.style.display = 'block'; // Torna visivel
-    
-    // Opcional: Esconder a mensagem apos alguns segundos
-    if (type === 'success' || type === 'error') {
+    generalMessageDiv.className = `message-display ${type}`;
+    generalMessageDiv.style.display = 'block';
+    generalMessageDiv.classList.remove('fade-out');
+
+    // Esconde com animação após 5 segundos
+    setTimeout(() => {
+        generalMessageDiv.classList.add('fade-out');
         setTimeout(() => {
             generalMessageDiv.style.display = 'none';
-        }, 5000); // Esconde apos 5 segundos
-    }
+        }, 500);
+    }, 5000);
 }
 
-// Funcao auxiliar para exibir erros de validacao por campo
+// Exibe erro abaixo de um campo específico
 function displayInputError(fieldId, message) {
     const errorDiv = document.getElementById(`${fieldId}-error`);
     if (errorDiv) {
         errorDiv.textContent = message;
         errorDiv.style.display = 'block';
     }
-    // Opcional: Adicionar borda vermelha ao input
+
     const inputElement = document.getElementById(fieldId);
     if (inputElement) {
         inputElement.style.borderColor = '#dc3545';
     }
 }
 
-// Funcao auxiliar para limpar todas as mensagens e erros de campo
+// Limpa todos os erros e mensagens anteriores
 function clearMessages() {
-    document.getElementById('general-message').style.display = 'none';
-    document.getElementById('general-message').textContent = '';
+    const generalMessageDiv = document.getElementById('general-message');
+    if (generalMessageDiv) {
+        generalMessageDiv.style.display = 'none';
+        generalMessageDiv.textContent = '';
+        generalMessageDiv.classList.remove('fade-out');
+    }
 
     const errorDivs = document.querySelectorAll('.input-error-message');
     errorDivs.forEach(div => {
@@ -42,74 +48,72 @@ function clearMessages() {
 
     const inputElements = document.querySelectorAll('.password-form input');
     inputElements.forEach(input => {
-        input.style.borderColor = '#ccc'; // Volta para a cor padrao
+        input.style.borderColor = '#ccc';
     });
 }
 
+// Evento de envio do formulário
+const form = document.getElementById('resetPasswordForm');
+if (form) {
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-document.getElementById('resetPasswordForm').addEventListener('submit', async function(e) {
-  e.preventDefault(); // Impede o envio padrao do formulario
+        clearMessages();
 
-  clearMessages(); // Limpa mensagens anteriores antes de cada submissao
+        const email = document.getElementById('email_recuperacao').value;
+        const novaSenha = document.getElementById('nova-senha_recuperacao').value;
+        const confirmarSenha = document.getElementById('confirmar-senha_recuperacao').value;
 
-  const email = document.getElementById('email_recuperacao').value;
-  const novaSenha = document.getElementById('nova-senha_recuperacao').value;
-  const confirmarSenha = document.getElementById('confirmar-senha_recuperacao').value;
+        // Validação
+        if (!email) {
+            displayInputError('email_recuperacao', 'Por favor, digite seu email.');
+            return;
+        }
 
-  // Validacoes (agora usando displayInputError)
-  if (!email) {
-    displayInputError('email_recuperacao', 'Por favor, digite seu email.');
-    return;
-  }
-  // Exemplo de validacao de formato de email (simples)
-  if (!email.includes('@') || !email.includes('.')) {
-      displayInputError('email_recuperacao', 'Email invalido.');
-      return;
-  }
+        if (!email.includes('@') || !email.includes('.')) {
+            displayInputError('email_recuperacao', 'Email inválido.');
+            return;
+        }
 
-  if (novaSenha !== confirmarSenha) {
-    displayInputError('confirmar-senha_recuperacao', 'As novas senhas nao coincidem!');
-    displayInputError('nova-senha_recuperacao', 'As senhas nao coincidem!'); // Mensagem tambem na nova senha
-    return;
-  }
+        if (novaSenha !== confirmarSenha) {
+            displayInputError('nova-senha_recuperacao', 'As senhas não coincidem.');
+            displayInputError('confirmar-senha_recuperacao', 'As senhas não coincidem.');
+            return;
+        }
 
-  if (novaSenha.length < 6) {
-    displayInputError('nova-senha_recuperacao', 'A nova senha deve ter pelo menos 6 caracteres!');
-    return;
-  }
+        if (novaSenha.length < 6) {
+            displayInputError('nova-senha_recuperacao', 'A nova senha deve ter pelo menos 6 caracteres.');
+            return;
+        }
 
-  const data = { email, novaSenha };
-  
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // ATENCAO: Ajuste esta URL conforme o ambiente:
-  // Para TESTE LOCAL: 'http://localhost:5000/api/reset-password'
-  // Para PRODUCAO (Render): 'https://painel-despesas.onrender.com/api/reset-password'
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const backendURL = 'https://painel-despesas.onrender.com/api/reset-password'; // Mude para http://localhost:5000 para teste local
+        const data = { email, novaSenha };
 
-  try {
-    const response = await fetch(backendURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+        const backendURL = 'https://painel-despesas.onrender.com/api/reset-password';
+
+        try {
+            const response = await fetch(backendURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                displayMessage('success', 'Senha alterada com sucesso! Você já pode logar com a nova senha.');
+
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            } else {
+                displayMessage('error', `Erro ao alterar senha: ${result.message || 'Erro desconhecido.'}`);
+                console.error('Erro ao alterar senha:', result);
+            }
+        } catch (error) {
+            displayMessage('error', 'Não foi possível conectar ao servidor. Tente novamente mais tarde.');
+            console.error('Erro de conexão:', error);
+        }
     });
-
-    const result = await response.json();
-
-    if (response.ok) { // Se o status for 2xx (sucesso)
-      displayMessage('success', 'Senha alterada com sucesso! Voce ja pode logar com a nova senha.');
-      // Opcional: Redirecionar apos um pequeno delay para o usuario ler a mensagem
-      setTimeout(() => {
-          window.location.href = 'login.html'; 
-      }, 2000); // Redireciona apos 2 segundos
-    } else {
-      displayMessage('error', `Erro ao alterar senha: ${result.message || 'Ocorreu um erro desconhecido.'}`);
-      console.error('Erro ao alterar senha:', result);
-    }
-  } catch (error) {
-    displayMessage('error', 'Nao foi possivel conectar ao servidor. Verifique sua conexao ou tente novamente mais tarde.');
-    console.error('Erro de conexao:', error);
-  }
-});
+}

@@ -81,3 +81,13 @@ body {
   font-size: 20px;
   vertical-align: middle;
 }
+
+.message-display {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.message-display.fade-out {
+  opacity: 0;
+}
+
