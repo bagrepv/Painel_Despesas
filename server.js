@@ -40,7 +40,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Email do administrador para receber notificacoes de novas solicitacoes de acesso
-const ADMIN_EMAIL = 'pvmatos89@gmail.com'; // NOVO: Defina o email do administrador aqui
+const ADMIN_EMAIL = 'coradojoquebede@gmail.com'; // NOVO: Defina o email do administrador aqui
 
 // Rota de Login de Usuario
 app.post('/api/login', async (req, res) => {
