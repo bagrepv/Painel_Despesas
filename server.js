@@ -224,9 +224,9 @@ app.get('/admin/aprovar-usuario', async (req, res) => {
     }
 });
 
-// =============================================
-// Inicializacao do Servidor
-// =============================================
-// Define a porta: usa a variavel de ambiente PORT (para Render) ou 5000 (para local)
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
