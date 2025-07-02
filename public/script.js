@@ -284,6 +284,64 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Funcao auxiliar para exibir mensagens gerais (sucesso, erro, aviso)
+function displayGeneralMessage(type, message) {
+    const generalMessageDiv = document.getElementById('general-message');
+    // Verifica se o elemento existe na pagina atual
+    if (generalMessageDiv) { 
+        generalMessageDiv.textContent = message;
+        generalMessageDiv.className = `message-display ${type}`; // Adiciona a classe de tipo (success, error, warning)
+        generalMessageDiv.style.display = 'block'; // Torna visivel
+        
+        // Opcional: Esconder a mensagem apos alguns segundos
+        if (type === 'success' || type === 'error') {
+            setTimeout(() => {
+                generalMessageDiv.style.display = 'none';
+            }, 5000); // Esconde apos 5 segundos
+        }
+    } else {
+        // Fallback para alert() se o elemento nao for encontrado (idealmente nao deveria acontecer)
+        console.warn(`Elemento #general-message nao encontrado. Exibindo alert(): ${message}`);
+        alert(message);
+    }
+}
+
+// Funcao auxiliar para exibir erros de validacao por campo
+function displayInputError(fieldId, message) {
+    const errorDiv = document.getElementById(`${fieldId}-error`);
+    if (errorDiv) { // Verifica se o elemento de erro especifico do campo existe
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+    // Opcional: Adicionar borda vermelha ao input
+    const inputElement = document.getElementById(fieldId);
+    if (inputElement) {
+        inputElement.style.borderColor = '#dc3545';
+    }
+}
+
+// Funcao auxiliar para limpar todas as mensagens e erros de campo
+function clearAllMessages() {
+    const generalMessageDiv = document.getElementById('general-message');
+    if (generalMessageDiv) {
+        generalMessageDiv.style.display = 'none';
+        generalMessageDiv.textContent = '';
+    }
+
+    const errorDivs = document.querySelectorAll('.input-error-message');
+    errorDivs.forEach(div => {
+        div.style.display = 'none';
+        div.textContent = '';
+    });
+
+    // Limpa bordas vermelhas dos inputs
+    // Seleciona inputs de todos os formularios que usam este padrao
+    const inputElements = document.querySelectorAll('#primeiroAcessoForm input, #passwordForm input, #resetPasswordForm input');
+    inputElements.forEach(input => {
+        input.style.borderColor = '#ccc'; // Volta para a cor padrao
+    });
+}
+
     // Configura o botão de fechar do modal de primeiro acesso.
     const closeBtn = document.querySelector('#modal-perfil .close-btn');
     if (closeBtn) {
